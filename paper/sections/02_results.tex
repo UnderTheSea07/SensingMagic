@@ -30,10 +30,12 @@ acquisition and a power draw of \dataneeded{system power, mW}.
 % ----------------------------------------------------------------------
 \subsection*{Geometry-dependent amplification and physical characterization of magnetic cilia}
 % -> Fig. 2
-We fabricated NdFeB--elastomer cilia by mixing, degassing, mould filling,
+We fabricated NdFeB--PDMS cilia by mixing, degassing, mould filling,
 magnetic pre-alignment, curing and demoulding, followed by final magnetization
-(Fig.~2a,b; Methods). Cilia were produced across a geometry matrix of lengths
-$L=3,5,8$~mm and diameters $d=0.5,0.8$~mm at a pitch of
+(Fig.~2a,b; Methods); the effective magnetization, calibrated against
+finite-element case studies, is $M\approx82$~kA\,m$^{-1}$. Cilia were produced
+across a geometry matrix of lengths $L=3,5,8$~mm and diameters
+$d=0.5,0.8,1.0$~mm (nine combinations) at a pitch of
 \dataneeded{measured pitch $s$, mm} (Fig.~2c). For each geometry we measured
 \dataneeded{$n$ cilia measured per geometry, target $\geq 30$ from $\geq 3$
 patches} cilia and report mean\,$\pm$\,s.d.\ of height, diameter and pitch.
@@ -42,24 +44,30 @@ specimens ($n=$~\dataneeded{independent specimens per group, target 5 (>=)})
 gives a modulus of \dataneeded{modulus, kPa} and loading--unloading hysteresis
 of \dataneeded{mechanical hysteresis, \%} (Fig.~2d).
 
-To test whether the cilia geometry enhances weak-stimulus response, we compared
-each of the six geometries against matched controls---a flat magnetic film,
-short magnetic pillars, non-magnetic cilia and a bare MLX90393---under
-\dataneeded{normal-force levels, e.g.\ 10/20/50/100~mN} normal and
-\dataneeded{shear-force levels} shear loads
-($n=$~\dataneeded{independent patches, target 3} patches,
-\dataneeded{repeats per condition} repeats). We define the force sensitivity
-$S=\mathrm{d}|\Delta\mathbf{B}|/\mathrm{d}F$, the cilia gain
+Geometry-dependent sensitivity was mapped by loading each of the nine
+geometries normally and tangentially at indentation depths of 1, 2 and 3~mm
+against an ATI force/torque reference, extracting the plateau ratio
+$S=|\Delta\mathbf{B}|/F$ per trial ($\geq 3$ trials per point; 44 valid
+condition points, one excluded artifact). A second-order response surface over
+$(L,d)$ captures the trend with $R^2=0.92$ for tangential and $R^2=0.68$ for
+normal loading, with sensitivities spanning approximately 3--50~mT\,N$^{-1}$
+and long, slender cilia ($L=8$~mm) giving the largest response; large-depth
+points fall systematically below the small-signal trend, consistent with
+deflection saturation (Fig.~2e). Repeated manual loading on a fixed patch gave
+a peak-amplitude coefficient of variation of 13.4\% across 20 trials,
+dominated by depth variability of the manual protocol. The comparison against
+matched controls---a flat magnetic film, short magnetic pillars, non-magnetic
+cilia and a bare MLX90393---required for the cilia gain
 $G_{\mathrm{cilia}}=S_{\mathrm{cilia}}/S_{\mathrm{flat}}$ and the limit of
-detection $\mathrm{LOD}=3\sigma_B/S$. The optimal geometry
-\dataneeded{best $L\times d$} reaches a sensitivity of \dataneeded{$S$, units}
-and a gain of \dataneeded{$G_{\mathrm{cilia}}$ with 95\% CI} over the matched
-flat film, with an LOD of \dataneeded{LOD, mN} (Fig.~2e). Dynamic
-characterization gives a rise time of \dataneeded{rise time, ms}, a recovery
-time of \dataneeded{recovery time, ms} and a flat frequency response up to
-\dataneeded{bandwidth, Hz}; durability over \dataneeded{cycles, target
-$\geq$10{,}000} cycles and baseline drift of \dataneeded{drift over $\geq$30~min}
-confirm stability (Fig.~2f).
+detection $\mathrm{LOD}=3\sigma_B/S$ remains to be acquired:
+\dataneeded{flat-film / pillar / non-magnetic / bare-sensor control data,
+$G_{\mathrm{cilia}}$ with 95\% CI, LOD}. Dynamic characterization from high-rate tap events gives a
+10--90\% response time of 25~ms and recovery of 26~ms for the fastest events
+(median response 50~ms across 81 events); cyclic fatigue over 150{,}000
+compression cycles on three independent samples shows no significant
+sensitivity degradation (within $\pm$4\% from 50k to 150k cycles on the two
+samples with reliable acquisition), and baseline drift over
+\dataneeded{drift over $\geq$30~min} remains to be quantified (Fig.~2f).
 
 \noindent\textit{Claim gate.} The term ``cilia-amplified'' is used only if the
 cilia group significantly exceeds the flat control with a defined gain across

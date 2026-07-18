@@ -27,8 +27,13 @@ All 1880 CSVs are **single-MLX90393** (`ms,X,Y,Z`). No 2×2 / 1×4 / 44-node
 array data, no Nano17 force column, no ECG/PPG. Consequence:
 - **Fig. 1, 3, 4 (array, force decoding, full-hand): zero backing data.** All
   those Results/claims are structural placeholders only.
-- **Fig. 2 (cilia): no controlled data yet** (no flat/pillar/bare comparison
-  captured) — `cilia-enhanced`/`cilia-amplified` gate not testable from repo.
+- **Fig. 2 (cilia): SUBSTANTIALLY BACKED as of 2026-07-18** by the
+  reliability-project dataset (see `reliability_dataset_mapping.md`):
+  9-geometry sensitivity surface (R²=0.92 tangential), 150k-cycle fatigue
+  (n=3, stable ±4%), response 25 ms / recovery 26 ms, ATI force reference.
+  Still missing: flat/pillar/non-magnetic/bare controls — the
+  `cilia-enhanced`/`cilia-amplified` gate REMAINS CLOSED; manual-loading CV
+  13.4% means force-calibrated claims should be redone per SOP-1.
 - **Fig. 5a airflow: DATA INSUFFICIENT** — see `wind_data_verdict.md`. No
   credible ΔB–v (fan-EMI confound + drift + non-monotonic). Placeholders stay.
 - **Fig. 5d–f pulse: QUALITATIVE ONLY** — see `pulse_data_verdict.md`.

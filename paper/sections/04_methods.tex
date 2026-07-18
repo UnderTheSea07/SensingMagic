@@ -6,8 +6,11 @@
 
 \subsection*{Materials and magnetic particle preparation}
 NdFeB powder (\dataneeded{grade, particle size, supplier}) was combined with
-\dataneeded{elastomer: Ecoflex/PDMS grade} at \dataneeded{NdFeB wt\%}. Record
-particle size distribution, weight fraction and mixing ratio.
+PDMS (\dataneeded{grade, base:curing ratio}) at \dataneeded{NdFeB wt\%}. The
+effective magnetization of the cured composite, calibrated by matching
+finite-element tip-deflection case studies (deviation $<$0.1\%), is
+$M\approx82$~kA\,m$^{-1}$. Record particle size distribution, weight fraction
+and mixing ratio.
 
 \subsection*{Cilia mould design and fabrication}
 Moulds (\dataneeded{material, machining/printing method, resolution}) defined
@@ -31,6 +34,31 @@ Stress--strain, modulus and hysteresis on \dataneeded{tester model} at
 \subsection*{Magnetic characterization}
 No-load field, sensitivity and LOD per geometry; report $\sigma_B$ and
 $S=\mathrm{d}|\Delta\mathbf{B}|/\mathrm{d}F$.
+
+\subsection*{Geometry--sensitivity characterization (completed dataset)}
+Force--magnetic response across the nine $(L,d)$ geometries was acquired with
+a single MLX90393 beneath each cilia patch (magnetic logging at
+$\approx$1100~Hz) and an ATI six-axis force/torque sensor (S/N FT35606;
+1000~Hz acquisition with 16-sample averaging, 62.5~Hz effective) as force
+reference. Loading was applied manually at nominal indentation depths of 1, 2
+and 3~mm, normally and tangentially, in repeated
+load--hold ($\sim$15--25~s)--unload events (20 trials per condition; 1871 of
+1920 trials passing quality control). Processing used Hampel despiking,
+zero-phase Butterworth low-pass filtering (magnetic 20~Hz, force 10~Hz),
+pre-load baseline subtraction and loading-edge alignment of the two streams
+(median alignment correlation $r=0.79$); the per-trial sensitivity is the
+plateau ratio $S=|\Delta B|/F$. Because loading was manual, per-trial depth
+varies (peak-amplitude CV 13.4\%); the robot-controlled protocol below
+supersedes this dataset for force-calibrated claims.
+
+\subsection*{Cyclic fatigue testing}
+Three independent samples were cycled in compression to 150{,}000 cycles
+(drive amplitude 0.52--0.62~N), with interleaved checkpoints at 5k--150k
+cycles ($\sim$1000 recorded cycles per checkpoint). Sensitivity per checkpoint
+was computed as the ratio of median magnetic to median force peak-to-peak
+amplitude ($S=\Delta B_z/\Delta F_z$), using ratio normalization to remove
+drive-amplitude changes; checkpoints with $>$9\% corrupted-packet rate were
+flagged low-confidence and displayed as open symbols.
 
 \subsection*{Local 2$\times$2 PCB architecture}
 Four MLX90393 at sensor pitch \dataneeded{pitch}; patch size
