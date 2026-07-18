@@ -36,20 +36,27 @@ No-load field, sensitivity and LOD per geometry; report $\sigma_B$ and
 $S=\mathrm{d}|\Delta\mathbf{B}|/\mathrm{d}F$.
 
 \subsection*{Geometry--sensitivity characterization (completed dataset)}
-Force--magnetic response across the nine $(L,d)$ geometries was acquired with
-a single MLX90393 beneath each cilia patch (magnetic logging at
-$\approx$1100~Hz) and an ATI six-axis force/torque sensor (S/N FT35606;
-1000~Hz acquisition with 16-sample averaging, 62.5~Hz effective) as force
-reference. Loading was applied manually at nominal indentation depths of 1, 2
-and 3~mm, normally and tangentially, in repeated
-load--hold ($\sim$15--25~s)--unload events (20 trials per condition; 1871 of
-1920 trials passing quality control). Processing used Hampel despiking,
-zero-phase Butterworth low-pass filtering (magnetic 20~Hz, force 10~Hz),
-pre-load baseline subtraction and loading-edge alignment of the two streams
-(median alignment correlation $r=0.79$); the per-trial sensitivity is the
-plateau ratio $S=|\Delta B|/F$. Because loading was manual, per-trial depth
-varies (peak-amplitude CV 13.4\%); the robot-controlled protocol below
-supersedes this dataset for force-calibrated claims.
+Two complementary datasets were acquired with a single MLX90393 beneath the
+cilia (magnetic logging at $\approx$1100~Hz) and an ATI six-axis force/torque
+sensor (S/N FT35606; 1000~Hz acquisition with 16-sample averaging, 62.5~Hz
+effective) as force reference, with loading applied manually at nominal
+indentation depths of 1, 2 and 3~mm, normally and tangentially, in repeated
+load--hold ($\sim$15--25~s)--unload events. (i)~\emph{Geometry matrix}: the
+nine $(L,d)$ combinations were each measured with $\geq$3 trials per
+condition point, yielding 44 valid sensitivity points (one artifact
+excluded). (ii)~\emph{Cilia-array dataset}: square arrays of $2\times2$ to
+$5\times5$ cilia at pitches of 0.5 or 1.0~mm ($L=3$ and 5~mm), read by a
+sensor $\approx$1~mm beneath the array centre; 20 trials per condition, 1871
+of 1920 trials passing quality control (97.4\%). Processing used Hampel
+despiking, zero-phase Butterworth low-pass filtering (magnetic 20~Hz, force
+10~Hz), pre-load baseline subtraction and loading-edge alignment of the two
+streams (median alignment correlation $r=0.79$); the per-trial sensitivity is
+the plateau ratio $S=|\Delta B|/F$. A dipole-superposition large-deflection
+beam model of the cilium, validated against finite-element case studies
+(tip-deflection deviation $<$0.1\%), reproduces measured single-cilium
+responses with relative errors of 0.27--0.41\%. Because loading was manual,
+per-trial depth varies (peak-amplitude CV 13.4\%); the robot-controlled
+protocol below supersedes these datasets for force-calibrated claims.
 
 \subsection*{Cyclic fatigue testing}
 Three independent samples were cycled in compression to 150{,}000 cycles
