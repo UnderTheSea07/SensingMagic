@@ -39,12 +39,20 @@ from scipy.signal import find_peaks
 # Style (paper-wide)
 # ----------------------------------------------------------------------------
 plt.rcParams.update({
-    "font.size": 7, "axes.labelsize": 7, "axes.titlesize": 7,
-    "xtick.labelsize": 6, "ytick.labelsize": 6, "legend.fontsize": 6,
-    "axes.linewidth": 0.6, "pdf.fonttype": 42, "figure.dpi": 300,
+    "font.family": "DejaVu Sans",
+    "font.size": 7.5, "axes.labelsize": 8, "axes.titlesize": 8,
+    "xtick.labelsize": 7, "ytick.labelsize": 7, "legend.fontsize": 6.8,
+    "axes.linewidth": 0.8,
+    "xtick.major.width": 0.8, "ytick.major.width": 0.8,
+    "xtick.major.size": 2.8, "ytick.major.size": 2.8,
+    "xtick.direction": "out", "ytick.direction": "out",
+    "axes.spines.top": False, "axes.spines.right": False,
+    "pdf.fonttype": 42, "figure.dpi": 300,
 })
-BLUE, ORANGE, GREEN, BLACK = "#0072B2", "#D55E00", "#2ca02c", "#000000"
-GREY = "0.55"
+# Okabe-Ito palette
+BLUE, VERM, BLACK, GREY = "#0072B2", "#D55E00", "#000000", "#888888"
+ANN = "#555555"        # annotation text
+REF = "#AAAAAA"        # dashed reference lines
 
 RAW_HIGHRATE = "/Users/arielzhang/Desktop/磁毛传感器可靠性分析原始数据/高采样率_z轴.csv"
 OVERLAY_CSV = ("/Users/arielzhang/Desktop/磁毛传感器可靠性分析原始数据/"
@@ -152,67 +160,79 @@ cv_pct = 100.0 * pk_sd / pk_mean
 # ----------------------------------------------------------------------------
 # Figure
 # ----------------------------------------------------------------------------
-fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.3), constrained_layout=True,
+fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.35), constrained_layout=True,
                          gridspec_kw={"width_ratios": [1.15, 1.0, 1.0]})
 
-# --- panel a -----------------------------------------------------------------
+# --- panel f1 ----------------------------------------------------------------
 ax = axes[0]
-ax.plot(te, np.abs(dbz), color="0.75", lw=0.6, label="raw")
-ax.plot(te, np.abs(s), color=BLUE, lw=1.0, label="7-ms avg.")
-for lv in (0.1 * A, 0.9 * A):
-    ax.plot([-130, 60], [lv, lv], color="0.6", lw=0.5, ls=(0, (2, 2)), zorder=0)
-ax.text(64, 0.9 * A, f"90% of {A:.0f} µT", ha="left", va="center",
-        fontsize=5.5, color="0.45")
-ax.plot([t10r, t90r], [0.1 * A, 0.9 * A], "o", color=BLACK, ms=2.4, zorder=5)
-ax.plot([t90f, t10f], [0.9 * A, 0.1 * A], "s", color=BLACK, ms=2.2, zorder=5)
+ax.plot(te, np.abs(dbz), color=BLACK, alpha=0.30, lw=0.7, label="raw")
+ax.plot(te, np.abs(s), color=BLUE, lw=1.5, label="7-ms avg.")
 
-yarr = A + 10
-ax.annotate("", xy=(t10r, yarr), xytext=(t90r, yarr),
-            arrowprops=dict(arrowstyle="<->", lw=0.7, color=BLACK))
-ax.text(0.5 * (t10r + t90r), yarr + 2.5, f"rise 10–90%\n{rise_ms:.0f} ms",
-        ha="center", va="bottom", fontsize=6)
-ax.annotate("", xy=(t90f, yarr), xytext=(t10f, yarr),
-            arrowprops=dict(arrowstyle="<->", lw=0.7, color=BLACK))
-ax.text(t10f + 6, yarr, f"recovery 90–10%\n{recov_ms:.0f} ms",
-        ha="left", va="center", fontsize=6)
+# 10 % / 90 % guide lines (dashed, subtle) + level tag in the empty right area
+for lv in (0.1 * A, 0.9 * A):
+    ax.axhline(lv, color=REF, lw=0.6, ls=(0, (3, 2)), zorder=0)
+ax.text(146, 0.9 * A + 1.2, "90%", ha="right", va="bottom",
+        fontsize=6.5, color=ANN)
+
+# crossing markers (white-edged for separation from the trace)
+ax.plot([t10r, t90r], [0.1 * A, 0.9 * A], "o", color=BLACK, ms=2.6,
+        mec="white", mew=0.5, zorder=5)
+ax.plot([t90f, t10f], [0.9 * A, 0.1 * A], "s", color=BLACK, ms=2.4,
+        mec="white", mew=0.5, zorder=5)
+
+# compact double-headed arrows above the trace, one per interval
+ymax_win = np.abs(dbz[(te >= -150) & (te <= 150)]).max()
+y_arr = ymax_win + 4.5
+arrow_kw = dict(arrowstyle="<->", lw=0.6, color=ANN,
+                shrinkA=0, shrinkB=0, mutation_scale=6)
+ax.annotate("", xy=(t10r, y_arr), xytext=(t90r, y_arr),
+            arrowprops=dict(**arrow_kw))
+ax.text(0.5 * (t10r + t90r), y_arr + 1.8, f"rise 10–90%\n{rise_ms:.0f} ms",
+        ha="center", va="bottom", fontsize=6.5, color=ANN, linespacing=1.2)
+ax.annotate("", xy=(t90f, y_arr), xytext=(t10f, y_arr),
+            arrowprops=dict(**arrow_kw))
+ax.text(t10f + 7, y_arr, f"recovery\n{recov_ms:.0f} ms",
+        ha="left", va="center", fontsize=6.5, color=ANN, linespacing=1.2)
+
 ax.set_xlabel("Time (ms)")
 ax.set_ylabel("|ΔB$_z$| (µT)")
-ax.set_title("f1  Tap response event (manual loading)", loc="left")
-ax.set_xlim(-200, 200)
-ax.set_ylim(0, A + 27)
-ax.legend(frameon=False, loc="center right", bbox_to_anchor=(1.0, 0.29),
+ax.set_title("f1  Tap response event", loc="left")
+ax.set_xlim(-150, 150)
+ax.set_ylim(0, y_arr + 13.5)
+ax.legend(frameon=False, loc="center right", bbox_to_anchor=(1.0, 0.30),
           handlelength=1.2, borderaxespad=0.2, labelspacing=0.3)
 
-# --- panel b -----------------------------------------------------------------
+# --- panel f2 ----------------------------------------------------------------
 ax = axes[1]
 for j, c in enumerate(cyc_cols):
-    ax.plot(ov["time_s"], ov[c], color="0.7", lw=0.6,
-            label="cycles 1–5" if j == 0 else None)
-ax.plot(ov["time_s"], ov_mean, color=ORANGE, lw=1.0, label="mean")
+    ax.plot(ov["time_s"], ov[c], color=GREY, alpha=0.35, lw=0.7,
+            label=f"cycles 1–{len(cyc_cols)}" if j == 0 else None)
+ax.plot(ov["time_s"], ov_mean, color=VERM, lw=1.6, label="mean")
 ax.set_xlabel("Time (s)")
 ax.set_ylabel("ΔB$_z$ (µT)")
-ax.set_title("f2  Cycle overlay (n = 5)", loc="left")
-ax.legend(frameon=False, loc="upper right", handlelength=1.4,
-          borderaxespad=0.2, labelspacing=0.3)
+ax.set_title(f"f2  Cycle overlay (n = {len(cyc_cols)})", loc="left")
+leg = ax.legend(frameon=False, loc="upper right", handlelength=1.4,
+                borderaxespad=0.2, labelspacing=0.3)
+leg.legend_handles[0].set_alpha(0.7)      # keep the legend key legible
 
-# --- panel c -----------------------------------------------------------------
+# --- panel f3 ----------------------------------------------------------------
 ax = axes[2]
-ax.axhspan(pk_mean - pk_sd, pk_mean + pk_sd, color="0.88", zorder=0)
-ax.axhline(pk_mean, color=ORANGE, lw=0.9, zorder=1)
-ax.plot(pk["trial"], pk_abs, "o", color=BLUE, ms=2.8, mew=0, zorder=2)
-ax.text(0.03, 0.06,
+ax.axhspan(pk_mean - pk_sd, pk_mean + pk_sd, color=BLUE, alpha=0.12,
+           lw=0, zorder=0)
+ax.axhline(pk_mean, color=VERM, lw=1.4, zorder=1)
+ax.plot(pk["trial"], pk_abs, "o", color=BLUE, ms=3.4,
+        mec="white", mew=0.5, zorder=3)
+ax.text(0.03, 0.05,
         f"mean = {pk_mean:.0f} µT, s.d. = {pk_sd:.0f} µT\n"
         f"CV = {cv_pct:.1f}%",
-        transform=ax.transAxes, ha="left", va="bottom", fontsize=6)
+        transform=ax.transAxes, ha="left", va="bottom",
+        fontsize=6.5, color=ANN)
 ax.set_xlabel("Trial")
 ax.set_ylabel("|ΔB| peak (µT)")
-ax.set_title("f3  Peak amplitude (manual taps)", loc="left")
+ax.set_title(f"f3  Peak amplitude (n = {len(pk_abs)})", loc="left")
 ax.set_xlim(0, 21)
 ax.set_ylim(0, 1300)
 ax.set_xticks([1, 5, 10, 15, 20])
-
-for ax in axes:
-    ax.spines[["top", "right"]].set_visible(False)
 
 fig.savefig(OUT_PDF)
 fig.savefig(OUT_PNG)

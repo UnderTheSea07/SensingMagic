@@ -57,11 +57,11 @@ FAIL_MARGIN = 1.0           # % strain; mean stops this far before an
                             # in-window specimen failure (pre-break softening)
 
 GROUPS = [
-    # (label stem, specimen number range, color)
-    ("Non-mag.", range(1, 7),   "#1a1a1a"),
-    ("x-mag.",   range(7, 13),  "#c62828"),
-    ("y-mag.",   range(13, 19), "#1565c0"),
-    ("z-mag.",   range(19, 25), "#2e7d32"),
+    # (label stem, specimen number range, color) -- Okabe-Ito palette
+    ("Non-mag.", range(1, 7),   "#000000"),   # black
+    ("x-mag.",   range(7, 13),  "#0072B2"),   # blue
+    ("y-mag.",   range(13, 19), "#D55E00"),   # vermillion
+    ("z-mag.",   range(19, 25), "#009E73"),   # green
 ]
 
 
@@ -91,6 +91,21 @@ def setup_style():
         "pdf.fonttype": 42,
         "ps.fonttype": 42,
     })
+
+
+def pad_stems(stems, fontsize):
+    """Pad the group-name stems with spaces so the $E_t$ values in the legend
+    start at a common x -- the four entries read as a neat table. Widths are
+    measured with the actually-resolved font (TextPath), and the space width
+    by ink difference (trailing spaces carry no ink of their own)."""
+    from matplotlib.font_manager import FontProperties
+    from matplotlib.textpath import TextPath
+    fp = FontProperties(family=plt.rcParams["font.family"], size=fontsize)
+    w = lambda t: TextPath((0, 0), t, prop=fp).get_extents().width
+    space = w("i i") - w("ii")
+    target = max(w(s) for s in stems)
+    return [s + " " * (2 + max(0, int(round((target - w(s)) / space))))
+            for s in stems]
 
 
 def load_summary():
@@ -200,7 +215,7 @@ def main():
             curves.append(g)
             if fails_inside:  # keep mean clear of pre-break softening
                 mean_stop = min(mean_stop, s[-1] - FAIL_MARGIN)
-            ax.plot(GRID, g, color=color, lw=0.6, alpha=0.35,
+            ax.plot(GRID, g, color=color, lw=0.7, alpha=0.30,
                     solid_capstyle="round", zorder=2)
         arr = np.vstack(curves)
         all_ok = ~np.isnan(arr).any(axis=0)   # strains where every specimen has data
@@ -211,9 +226,15 @@ def main():
 
         et = np.array([summary[n]["Et"] for n in specs])
         handles.append(Line2D([], [], color=color, lw=1.8))
-        labels.append(f"{stem}  $E_t$ = {et.mean():.2f} ± {et.std(ddof=1):.2f} MPa")
+        labels.append((stem, et.mean(), et.std(ddof=1)))
         report.append((stem, specs, et.mean(), et.std(ddof=1),
                        GRID[all_ok][-1]))
+
+    # legend as a neat table: stems padded to equal width so Et values align
+    LEG_FS = 7.6
+    padded = pad_stems([s for s, _, _ in labels], LEG_FS)
+    labels = [f"{p}$E_t$ = {m:.2f} ± {s:.2f} MPa"
+              for p, (_, m, s) in zip(padded, labels)]
 
     ax.set_xlim(0, STRAIN_MAX)
     data_top = max(np.nanmax(l.get_ydata()) for l in ax.get_lines())
@@ -231,8 +252,8 @@ def main():
     for sp in ax.spines.values():
         sp.set_visible(True)
     ax.legend(handles, labels, loc="lower right", frameon=False,
-              fontsize=7.6, handlelength=1.5, borderaxespad=0.6,
-              labelspacing=0.45)
+              fontsize=LEG_FS, handlelength=1.6, handletextpad=0.6,
+              borderaxespad=0.6, labelspacing=0.5)
 
     fig.tight_layout(pad=0.4)
     for ext in ("svg", "pdf", "png"):

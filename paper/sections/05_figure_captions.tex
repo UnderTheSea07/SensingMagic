@@ -7,21 +7,21 @@
 
 % ---------------------------------------------------------------- Fig 1
 \paragraph{Figure 1 $\vert$ System concept and device architecture.}
-\textbf{(a)} \textit{Palmar hero view.} Magnetic cilia tactile skin on a
-robotic hand/glove, palmar side only, overlaid with a full-hand tactile map
-(schematic where indicated); insets show gentle bubble contact, weak airflow and
-wrist pulse. \textbf{(b)} \textit{Bioinspiration.} Mammalian whisker, insect
-sensillum and skin mechanoreceptor mapped to ordered magnetic cilia plus
+\textbf{(a)} Palmar hero view. Magnetic cilia tactile skin on a robotic
+hand/glove, palmar side only, overlaid with a full-hand tactile map
+(schematic where indicated); insets show gentle bubble contact, weak airflow
+and wrist pulse. \textbf{(b)} Bioinspiration. Mammalian whisker, insect
+sensillum and skin mechanoreceptor mapped to ordered magnetic cilia with
 tri-axis magnetic readout: flexible appendages convert weak mechanical
-disturbances into measurable deformation. \textbf{(c)} \textit{Exploded
-architecture (shown once).} Magnetic cilia, soft elastomer/adhesive, MLX90393
-sensing layer and hand-shaped FPCB; 44 MLX90393 nodes reading $B_x,B_y,B_z$,
-with the $2\times2$ and $1\times4$ units marked as local sub-arrays.
-\textbf{(d)} \textit{Single-cilium transduction.} No load, normal loading and
-shear loading produce distinct three-axis magnetic signatures.
-\textbf{(e)} \textit{Local-to-global.} $2\times2$ unit, $1\times4$ strip and
-44-node hand combined by sparse tri-axis sampling and calibrated spatial
-reconstruction. \textbf{(f)} \textit{Key capabilities.} Subtle-force
+disturbances into measurable deformation. \textbf{(c)} Exploded architecture
+(shown once). Magnetic cilia, soft elastomer/adhesive, MLX90393 sensing
+layer and hand-shaped FPCB; 44 MLX90393 nodes read $B_x,B_y,B_z$, with the
+$2\times2$ and $1\times4$ units marked as local sub-arrays.
+\textbf{(d)} Single-cilium transduction. No load, normal loading and shear
+loading produce distinct three-axis magnetic signatures.
+\textbf{(e)} Local-to-global integration. The $2\times2$ unit, $1\times4$
+strip and 44-node hand combined by sparse tri-axis sampling and calibrated
+spatial reconstruction. \textbf{(f)} Key capabilities. Subtle-force
 sensitivity, multi-axis local decoding, distributed full-hand readout, and
 airflow/pulse sensing. System parameters: \dataneeded{total/active nodes},
 \dataneeded{palmar coverage cm$^2$}, \dataneeded{thickness mm},
@@ -29,85 +29,93 @@ airflow/pulse sensing. System parameters: \dataneeded{total/active nodes},
 \dataneeded{dropped-frame \% / 10 min}, \dataneeded{power mW}.
 
 % ---------------------------------------------------------------- Fig 2
-\paragraph{Figure 2 $\vert$ Cilia design, fabrication and cilia-enhanced
+\paragraph{Figure 2 $\vert$ Cilia design, fabrication and physical
 characterization.}
-\textbf{(a)} NdFeB--elastomer composition (2000-mesh powder; Ecoflex for skin
-patches, PDMS 10:1 for geometry samples), particle distribution,
-pre-alignment and final magnetization directions, with sample photograph.
-\textbf{(b)} Fabrication workflow: mixing, vacuum degassing (15~min),
-pre-cure (5~min), mould filling, magnetic pre-alignment, full cure (60~min),
-demoulding + saturation magnetization.
-\textbf{(c)} Geometry ($L=3,5,8$~mm; $d=0.5,0.8,1.0$~mm; pitch
-\dataneeded{$s$}) with array/bending photographs and micrographs (scale bars);
+\textbf{(a)} Composite preparation. NdFeB--elastomer composition (2000-mesh
+powder; Ecoflex for skin patches, PDMS 10:1 for geometry samples), particle
+distribution, and pre-alignment and final magnetization directions, with a
+sample photograph.
+\textbf{(b)} Fabrication workflow. Mixing, vacuum degassing (15~min),
+pre-cure (5~min), mold filling, magnetic pre-alignment, full cure (60~min),
+and demolding with saturation magnetization.
+\textbf{(c)} Cilium geometry. $L=3,5,8$~mm; $d=0.5,0.8,1.0$~mm; pitch
+\dataneeded{$s$}; array and bending photographs and micrographs (scale bars);
 $n=$~\dataneeded{30 (>=)} cilia from $\geq 3$ patches, mean\,$\pm$\,s.d.
-\textbf{(d)} Mechanical properties (non-magnetic, $x$/$y$/$z$-magnetized):
-stress--strain to failure; tensile moduli $0.72\pm0.11$ / $0.85\pm0.09$ /
-$0.73\pm0.11$ / $0.68\pm0.11$~MPa (non-mag / $x$ / $y$ / $z$),
-$n=$~\dataneeded{specimens per group}, hysteresis \dataneeded{\%}. \textbf{(e)} Geometry--sensitivity response surface over the nine $(L,d)$
-combinations, normal and tangential loading at 1/2/3~mm depths (44 valid
-points; second-order fit $R^2=0.92$ tangential, $0.68$ normal;
-$S\approx$3--50~mT\,N$^{-1}$); enhancement vs.\ flat film, short pillars,
-non-magnetic cilia and bare sensor with cilia gain
+\textbf{(d)} Mechanical properties. Stress--strain to failure for
+non-magnetized and $x$/$y$/$z$-magnetized specimens; tensile moduli $E_t$ of
+$0.72\pm0.11$ / $0.85\pm0.09$ / $0.73\pm0.11$ / $0.68\pm0.11$~MPa
+(non-magnetized / $x$ / $y$ / $z$), $n=$~\dataneeded{specimens per group},
+hysteresis \dataneeded{\%}.
+\textbf{(e)} Geometry--sensitivity response surface. Sensitivity over the
+nine $(L,d)$ combinations under normal and tangential loading at 1/2/3~mm
+depths (44 valid points; second-order fit $R^2=0.92$ tangential, $0.68$
+normal; $S\approx$3--50~mT\,N$^{-1}$); enhancement versus flat film, short
+pillars, non-magnetic cilia and bare sensor, with cilia gain
 $G_{\mathrm{cilia}}=\dataneeded{value + 95\% CI}$ and LOD \dataneeded{mN}
-to be added from the control campaign. \textbf{(f)} Dynamics/durability:
-10--90\% response 25~ms / recovery 26~ms (fastest of 81 tap events; median
-response 50~ms); 150{,}000 compression cycles on $n=3$ independent samples
-with sensitivity stable within $\pm$4\% (50k--150k, reliable checkpoints);
-frequency response to \dataneeded{Hz} and drift over \dataneeded{$\geq$30 min}
-to be added.
+to be added from the control campaign.
+\textbf{(f)} Dynamics and durability. 10--90\% response 25~ms and recovery
+26~ms (fastest of 81 tap events; median response 50~ms); 150{,}000
+compression cycles on $n=3$ independent samples with sensitivity stable
+within $\pm$4\% (50k--150k, reliable checkpoints); frequency response to
+\dataneeded{Hz} and drift over \dataneeded{$\geq$30 min} to be added.
 
 % ---------------------------------------------------------------- Fig 3
 \paragraph{Figure 3 $\vert$ Local tri-axis sensing, unseen-position decoding and
 bubble-touch demonstration.}
-\textbf{(a)} $2\times2$ MLX90393 unit: chip coordinates, patch size, sensor
-pitch \dataneeded{mm}, cilia pitch. \textbf{(b)} Calibration setup: xArm,
-Nano17, non-magnetic probe, synchronized acquisition.
-\textbf{(c)} Tri-axis fingerprints over $F_n,F_s,\theta$: $\Delta B_x,\Delta
-B_y,\Delta B_z$, $|\Delta\mathbf{B}|$, cross-talk \dataneeded{\%}, hysteresis.
-\textbf{(d)} Unseen-position decoding on a \dataneeded{$7\times7$} grid,
-split 60/20/20 by position, no frame leakage; baseline models compared.
-\textbf{(e)} Performance (unseen test only): localization RMSE
+\textbf{(a)} Local $2\times2$ unit. MLX90393 chip coordinates, patch size,
+sensor pitch \dataneeded{mm} and cilia pitch. \textbf{(b)} Calibration
+setup. xArm, Nano17, non-magnetic probe and synchronized acquisition.
+\textbf{(c)} Tri-axis fingerprints. $\Delta B_x$, $\Delta B_y$, $\Delta B_z$
+and $|\Delta\mathbf{B}|$ over $F_n,F_s,\theta$; cross-talk \dataneeded{\%}
+and hysteresis. \textbf{(d)} Unseen-position decoding. Decoding on a
+\dataneeded{$7\times7$} grid split 60/20/20 by position with no frame
+leakage; baseline models compared.
+\textbf{(e)} Decoding performance (unseen test only). Localization RMSE
 \dataneeded{mm} (p95 \dataneeded{mm}), force NRMSE \dataneeded{\%}, direction
-error \dataneeded{deg}, cross-session \dataneeded{value}, model comparison.
-\textbf{(f)} Bubble-touch demonstration ($\geq 20$ bubbles, 3 size ranges,
-$\geq 2$ shams): approach/contact/deformation/release, peak $|\Delta B|$
-\dataneeded{units}, SNR \dataneeded{dB}, predicted position, synchronized video;
-estimated bubble mass \dataneeded{mg} (not a detection limit).
+error \dataneeded{deg}, cross-session \dataneeded{value} and model
+comparison. \textbf{(f)} Bubble-touch demonstration. $\geq 20$ bubbles in
+3 size ranges with $\geq 2$ shams: approach, contact, deformation and
+release; peak $|\Delta\mathbf{B}|$ \dataneeded{units}, SNR \dataneeded{dB},
+predicted position and synchronized video; estimated bubble mass
+\dataneeded{mg} (not a detection limit).
 
 % ---------------------------------------------------------------- Fig 4
 \paragraph{Figure 4 $\vert$ Full-hand integration and trustworthy spatial
 mapping.}
-\textbf{(a)} Real full-hand device (palmar front, side, integrated), cilia
-palmar only, minimal cross-section inset. \textbf{(b)} 44-node layout from real
+\textbf{(a)} Full-hand device. Real device in palmar front, side and
+integrated views, cilia on the palmar side only, with a minimal
+cross-section inset. \textbf{(b)} 44-node layout. Node positions from real
 CAD/FPCB coordinates (sensor\_id, $x,y$, region, $\theta$, MLX variant, MUX
-channel, status). \textbf{(c)} No-contact motion artifact control: open hand,
-finger flexion, fist, wrist pitch/roll, whole-hand rotation, cable motion
-($n=\dataneeded{10}$) vs.\ standard contacts; CMR \dataneeded{dB} before and
-\dataneeded{dB} after reference-sensor compensation; false-positive rate
-\dataneeded{\%}. \textbf{(d)} Known-position validation
-(\dataneeded{30} positions, \dataneeded{forces}, \dataneeded{trials}):
+channel, status). \textbf{(c)} No-contact motion-artifact control. Open
+hand, finger flexion, fist, wrist pitch/roll, whole-hand rotation and cable
+motion ($n=\dataneeded{10}$) versus standard contacts; CMR \dataneeded{dB}
+before and \dataneeded{dB} after reference-sensor compensation;
+false-positive rate \dataneeded{\%}. \textbf{(d)} Known-position validation.
+\dataneeded{30} positions, \dataneeded{forces}, \dataneeded{trials}:
 localization error \dataneeded{mm}, region confusion matrix
 \dataneeded{accuracy \%}, false-hotspot ratio \dataneeded{value}.
-\textbf{(e)} Whole-hand maps (palm press, fingertip pinch, cylinder/ball grasp,
-lateral shear, gentle contact; $n=\dataneeded{10}$), common color scale;
-force-calibrated maps only after per-node calibration.
-\textbf{(f)} Conformability and grasp-state discrimination (bending, wrapping,
-fist, cylinder, sphere): bending radius/cycles, sensitivity change
-\dataneeded{\%}, failure rate \dataneeded{\%}.
+\textbf{(e)} Whole-hand maps. Palm press, fingertip pinch, cylinder/ball
+grasp, lateral shear and gentle contact ($n=\dataneeded{10}$) on a common
+color scale; force-calibrated maps shown only after per-node calibration.
+\textbf{(f)} Conformability and grasp-state discrimination. Bending,
+wrapping, fist, cylinder and sphere: bending radius/cycles, sensitivity
+change \dataneeded{\%}, failure rate \dataneeded{\%}.
 
 % ---------------------------------------------------------------- Fig 5
 \paragraph{Figure 5 $\vert$ Weak airflow and pulse sensing.}
-\textbf{(a)} Wind-speed calibration \dataneeded{0--5 m s$^{-1}$} vs.\ reference
-anemometer (\dataneeded{5} runs, randomized): $\Delta B$--$v$ fit
+\textbf{(a)} Wind-speed calibration. \dataneeded{0--5 m s$^{-1}$} versus a
+reference anemometer (\dataneeded{5} runs, randomized): $\Delta B$--$v$ fit
 \dataneeded{$R^2$}, response/recovery time \dataneeded{s}, hysteresis
-\dataneeded{\%}. \textbf{(b)} Whole-hand pose experiment at
-\dataneeded{fixed m s$^{-1}$} (palm flat, fingers flexed, side, back, partial
-fist; $n=\dataneeded{5}$): spatial distribution of airflow-induced tactile
-responses (not a CFD flow field). \textbf{(c)} Dynamic airflow (step, staircase,
-random): lag, correlation \dataneeded{value}, RMSE \dataneeded{value}.
-\textbf{(d)} Pulse raw/filtered signal with synchronized ECG (and PPG where
-available). \textbf{(e)} Beat segmentation and beat-aligned waveform: systolic
-peak, HR MAE \dataneeded{bpm}, ECG-to-pulse delay \dataneeded{ms}, SNR
-\dataneeded{dB}, beat-to-beat CV \dataneeded{\%}. \textbf{(f)} Multi-position
-amplitude (centre, $\pm$radial, $\pm$ulnar, proximal, distal), \dataneeded{3
-$\times$ 60 s} per position; $n=\dataneeded{10--20}$ subjects.
+\dataneeded{\%}. \textbf{(b)} Whole-hand pose experiment. Poses at
+\dataneeded{fixed m s$^{-1}$} (palm flat, fingers flexed, side, back,
+partial fist; $n=\dataneeded{5}$): spatial distribution of airflow-induced
+tactile responses (not a CFD flow field). \textbf{(c)} Dynamic airflow.
+Step, staircase and random profiles: lag, correlation \dataneeded{value},
+RMSE \dataneeded{value}. \textbf{(d)} Pulse waveform. Raw and filtered
+signal with synchronized ECG (and PPG where available).
+\textbf{(e)} Beat segmentation and beat-aligned waveform. Systolic peak,
+HR MAE \dataneeded{bpm}, ECG-to-pulse delay \dataneeded{ms}, SNR
+\dataneeded{dB}, beat-to-beat CV \dataneeded{\%}. \textbf{(f)}
+Multi-position amplitude. Center, $\pm$radial, $\pm$ulnar, proximal and
+distal positions, \dataneeded{3 $\times$ 60 s} per position;
+$n=\dataneeded{10--20}$ subjects.

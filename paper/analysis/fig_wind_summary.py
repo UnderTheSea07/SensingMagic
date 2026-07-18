@@ -28,11 +28,22 @@ FIGS = os.path.join(os.path.dirname(__file__), "..", "figures")
 os.makedirs(FIGS, exist_ok=True)
 
 plt.rcParams.update({
-    "font.size": 7, "axes.labelsize": 7, "axes.titlesize": 7,
-    "xtick.labelsize": 6, "ytick.labelsize": 6, "legend.fontsize": 6,
-    "axes.linewidth": 0.6, "pdf.fonttype": 42, "figure.dpi": 300,
+    "font.family": "DejaVu Sans",
+    "font.size": 7.5, "axes.labelsize": 8, "axes.titlesize": 8,
+    "xtick.labelsize": 7, "ytick.labelsize": 7, "legend.fontsize": 6.8,
+    "axes.linewidth": 0.8,
+    "xtick.direction": "out", "ytick.direction": "out",
+    "xtick.major.width": 0.8, "ytick.major.width": 0.8,
+    "xtick.major.size": 2.8, "ytick.major.size": 2.8,
+    "xtick.minor.width": 0.6, "ytick.minor.width": 0.6,
+    "xtick.minor.size": 1.6, "ytick.minor.size": 1.6,
+    "pdf.fonttype": 42, "figure.dpi": 300,
 })
+ANN = "#555555"
 COLS = {0.0: "#000000", 2.43: "#0072B2", 10.0: "#D55E00"}
+# Okabe-Ito-blue sequential ramp, same as fig2e (geometry sensitivity)
+OI_BLUES = matplotlib.colors.LinearSegmentedColormap.from_list(
+    "oi_blues", ["#E7F1F9", "#A8D2EC", "#56B4E9", "#0072B2", "#014A73"])
 
 STARTUP_S, WIN_S, K, GUARD = 15.0, 1.0, 3.0, 1
 
@@ -96,45 +107,58 @@ def main():
     ref = np.mean([m for _, v, m in dc if v == 0], axis=0)
 
     # ---- figure ----------------------------------------------------------
-    fig, axes = plt.subplots(1, 3, figsize=(7.1, 2.0))
+    fig, axes = plt.subplots(1, 3, figsize=(7.1, 2.2))
 
     axa = axes[0]
     vv = [r[0] for r in good]
     axa.errorbar(vv, [r[1] for r in good], yerr=[r[2] for r in good],
-                 fmt="o", ms=3.5, capsize=2, color="#0072B2", lw=0.8)
+                 fmt="o", ms=4, color="#0072B2", markeredgecolor="white",
+                 markeredgewidth=0.5, capsize=2.5, elinewidth=0.8,
+                 capthick=0.8)
     for v, rms, sd, _ in outlier:
-        axa.plot(v, rms, "x", color="#D55E00", ms=5)
-        axa.annotate("trial 9\n(contaminated)", (v, rms), fontsize=5,
-                     color="#D55E00", textcoords="offset points", xytext=(4, -8))
+        axa.plot(v, rms, "x", color="#D55E00", ms=5, markeredgewidth=1.0)
+        axa.annotate("trial 9 (contaminated)", (v, rms), fontsize=6.5,
+                     color=ANN, textcoords="offset points", xytext=(0, -9),
+                     ha="center", va="top")
     axa.set_xlabel("Reference wind speed (m s$^{-1}$)")
     axa.set_ylabel(u"Band-limited RMS, $B_y$ 5–100 Hz (µT)")
     axa.set_title("a  Fluctuation metric: non-monotonic", loc="left")
 
     axb = axes[1]
     for v, fr, px in sorted(psds):
-        axb.loglog(fr[1:], px[1:], lw=0.6, color=COLS[v],
+        axb.loglog(fr[1:], px[1:], lw=1.0, color=COLS[v],
                    label=f"{v:g} m s$^{{-1}}$")
     axb.set_xlabel("Frequency (Hz)")
     axb.set_ylabel(u"PSD, $B_y$ (µT$^2$ Hz$^{-1}$)")
-    axb.legend(frameon=False, loc="lower left")
-    axb.set_title("b  Narrowband fan harmonics (EMI-confounded)", loc="left")
+    ylo, yhi = axb.get_ylim()
+    axb.set_ylim(ylo, yhi * 1000)  # headroom so legend clears the peaks
+    axb.legend(frameon=False, loc="upper right", handlelength=1.3,
+               handletextpad=0.5, borderaxespad=0.1, labelspacing=0.25)
+    axb.set_title("b  Fan harmonics: EMI-confounded", loc="left")
 
     axc = axes[2]
     tr = [d[0] for d in dc if d[0] != 9]
     mag = [np.linalg.norm(d[2] - ref) for d in dc if d[0] != 9]
     vs = [d[1] for d in dc if d[0] != 9]
-    sc = axc.scatter(tr, mag, c=vs, cmap="viridis", s=14, vmin=0, vmax=10)
-    axc.axvline(9, color="#D55E00", lw=0.6, ls="--")
-    axc.annotate("setup disturbed\n(trial 9, >1000 µT)", (9, max(mag) * 0.75),
-                 fontsize=5, color="#D55E00", ha="center")
-    plt.colorbar(sc, ax=axc, label="v (m s$^{-1}$)", pad=0.02)
+    sc = axc.scatter(tr, mag, c=vs, cmap=OI_BLUES, s=16, vmin=0, vmax=10,
+                     edgecolors="#555555", linewidths=0.4, zorder=3)
+    ylo, yhi = axc.set_ylim(top=max(mag) * 1.22)  # headroom for annotation
+    # dashed marker line stops below the annotation text so it never
+    # strikes through it
+    axc.axvline(9, color="#AAAAAA", lw=0.6, ls="--", zorder=1,
+                ymax=(max(mag) * 1.02 - ylo) / (yhi - ylo))
+    axc.annotate("setup disturbed\n(trial 9, >1000 µT)",
+                 (9, max(mag) * 1.19), fontsize=6.5, color=ANN,
+                 ha="center", va="top", linespacing=1.25)
+    cb = plt.colorbar(sc, ax=axc, label="v (m s$^{-1}$)", pad=0.02)
+    cb.outline.set_linewidth(0.6)
     axc.set_xlabel("Trial index (time order)")
     axc.set_ylabel(u"|steady mean shift| vs v=0 (µT)")
     axc.set_title("c  DC shift tracks time, not speed", loc="left")
 
     for ax in axes:
         ax.spines[["top", "right"]].set_visible(False)
-    fig.tight_layout(pad=0.4)
+    fig.tight_layout(pad=0.6)
     for ext in ("pdf", "png"):
         fig.savefig(os.path.join(FIGS, f"edx_wind_preliminary.{ext}"))
     print("wrote", os.path.join(FIGS, "edx_wind_preliminary.pdf"))

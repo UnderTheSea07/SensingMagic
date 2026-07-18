@@ -20,8 +20,9 @@ Outputs:
 
 Style: sans-serif (DejaVu Sans, matching the other Fig. 2 panels), white
 background, no grid, four-sided box, inward ticks on all sides, light raw
-per-specimen curves + bold group mean, legend inside lower right with
-Et = mean ± s.d. computed from the summary sheet at runtime.
+per-specimen curves + bold group mean, frameless legend inside upper left
+(empty region) with Et = mean ± s.d. computed from the summary sheet at
+runtime.
 
 Each specimen's curve is truncated at its break point (global maximum of the
 lightly smoothed stress): the Zwick export keeps a short post-break drop tail
@@ -45,12 +46,13 @@ DATA_DIR = ("/private/tmp/claude-502/-Users-arielzhang-Desktop-SensingMagic/"
 FIG_DIR = "/Users/arielzhang/Desktop/SensingMagic/paper/figures"
 BASENAME = "fig2d_stress_strain_wtpct" + ("" if __import__("os").environ.get("SS_FONT", "serif") == "serif" else "_sans")
 
-# colorblind-safe ordered ramp (Paul Tol bright hues, low->high filler loading)
+# colorblind-safe ordered ramp (Okabe-Ito hues, cool -> warm with filler
+# loading: sky, blue, orange, vermillion)
 GROUPS = [  # (file, wt%, color)
-    ("50_1.xlsx", 50, "#CCBB44"),
-    ("60_1.xlsx", 60, "#66CCEE"),
-    ("70_2.xlsx", 70, "#4477AA"),
-    ("80_5.xlsx", 80, "#AA3377"),
+    ("50_1.xlsx", 50, "#56B4E9"),
+    ("60_1.xlsx", 60, "#0072B2"),
+    ("70_2.xlsx", 70, "#E69F00"),
+    ("80_5.xlsx", 80, "#D55E00"),
 ]
 
 SUMMARY_SHEET = "测试结果"
@@ -207,7 +209,7 @@ def main():
 
         # light per-specimen raw curves, each ending at its break point
         for g, y in curves:
-            ax.plot(g, y, color=color, lw=0.6, alpha=0.3, zorder=2)
+            ax.plot(g, y, color=color, lw=0.7, alpha=0.3, zorder=2)
 
         # bold group mean, only where ALL specimens are still intact
         cutoff = min(g[-1] for g, _ in curves)
@@ -228,16 +230,24 @@ def main():
     ax.set_ylabel("Stress (MPa)", fontsize=11)
     ax.set_xlim(0, 750)   # last break is at 713% strain (763% was drop tail)
     ax.set_ylim(0, 1.25)
+    # 6 majors on each axis, ending exactly at the box corners (0/750, 0/1.25)
+    ax.xaxis.set_major_locator(plt.MultipleLocator(150))
+    ax.xaxis.set_minor_locator(plt.MultipleLocator(50))
+    ax.yaxis.set_major_locator(plt.MultipleLocator(0.25))
+    ax.yaxis.set_minor_locator(plt.MultipleLocator(0.125))
     ax.tick_params(direction="in", top=True, right=True, labelsize=9.5,
                    length=3.5, width=0.8)
+    ax.tick_params(which="minor", direction="in", top=True, right=True,
+                   length=1.9, width=0.6)
     for sp in ax.spines.values():
         sp.set_visible(True)
 
-    leg = ax.legend(handles, labels, loc="lower right", fontsize=8.3,
-                    frameon=True, framealpha=1.0, edgecolor="0.7",
-                    borderpad=0.6, handlelength=1.6, handletextpad=0.7,
-                    labelspacing=0.45)
-    leg.get_frame().set_linewidth(0.6)
+    # Frameless legend in the empty upper-left region (all curves rise to the
+    # right; the 80 wt% raw curves peak at ~0.81 MPa, well below the legend).
+    # Lower right would sit on top of the 60/70 wt% raw curves.
+    ax.legend(handles, labels, loc="upper left", fontsize=8.3,
+              frameon=False, borderaxespad=0.6,
+              handlelength=1.6, handletextpad=0.6, labelspacing=0.5)
 
     fig.tight_layout(pad=0.4)
     for ext in ("svg", "pdf", "png"):
