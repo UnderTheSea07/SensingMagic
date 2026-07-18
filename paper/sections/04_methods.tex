@@ -6,23 +6,29 @@
 
 \subsection*{Materials and magnetic particle preparation}
 2000-mesh NdFeB powder (nominal particle size $\approx$6.5~$\mu$m;
-\dataneeded{grade, supplier}) was combined with PDMS
-(\dataneeded{grade, e.g.\ Sylgard 184}; base:curing agent 10:1 by mass) at
-\dataneeded{NdFeB wt\%}. The effective magnetization of the cured composite,
-calibrated by matching finite-element tip-deflection case studies (deviation
-$<$0.1\%), is $M\approx82$~kA\,m$^{-1}$.
+\dataneeded{grade, supplier}) was combined with the elastomer matrix at
+\dataneeded{NdFeB wt\%}: Ecoflex (\dataneeded{grade, e.g.\ 00-30}) for the
+tactile-skin cilia patches (per the fabrication workflow) and PDMS
+(base:curing agent 10:1 by mass) for the geometry/reliability sample series
+(\dataneeded{confirm matrix assignment per sample batch}). The effective
+magnetization of the cured composite, calibrated by matching finite-element
+tip-deflection case studies (deviation $<$0.1\%), is
+$M\approx82$~kA\,m$^{-1}$.
 
 \subsection*{Cilia mould design and fabrication}
 Moulds (\dataneeded{material, machining/printing method, resolution}) defined
 cilia of $L=3,5,8$~mm and $d=0.5,0.8,1.0$~mm; array samples used pitches of
 0.5 or 1.0~mm (geometry-matrix sample pitch: \dataneeded{pitch $s$}).
-Process: mixing, degassing (\dataneeded{vacuum, duration}), mould filling,
-curing (\dataneeded{temperature, time}) and demoulding.
+Process (per the established workflow): mixing, vacuum degassing (15~min),
+pre-cure (5~min at \dataneeded{temperature}), mould filling/casting, magnetic
+pre-alignment under a uniform field, full cure (60~min at
+\dataneeded{temperature}) and demoulding.
 
-\subsection*{Magnetization}
-Cured cilia were magnetized in a single post-cure step by
-\dataneeded{impulse magnetizer / permanent-magnet field strength and
-direction; confirm no separate in-curing pre-alignment was used}.
+\subsection*{Magnetic pre-alignment and final magnetization}
+The NdFeB-loaded elastomer was pre-aligned under a uniform magnetic field
+(\dataneeded{field strength, direction}) applied between casting and full
+cure; after demoulding, samples were magnetized to saturation in a strong
+field (\dataneeded{magnetizer type, field strength, direction}).
 
 \subsection*{Geometry measurement}
 Height, diameter and pitch measured on \dataneeded{$n\geq 30$ cilia, $\geq 3$
@@ -62,8 +68,11 @@ protocol below supersedes these datasets for force-calibrated claims.
 
 \subsection*{Cyclic fatigue testing}
 Three independent samples were cycled in compression to 150{,}000 cycles
-(drive amplitude 0.52--0.62~N), with interleaved checkpoints at 5k--150k
-cycles ($\sim$1000 recorded cycles per checkpoint). Sensitivity per checkpoint
+under machine-driven periodic loading (period 0.512~s, $\approx$2.0~Hz;
+drive amplitude 0.52--0.62~N; actuator: \dataneeded{model}), with
+interleaved checkpoints at 5k--150k cycles ($\sim$1000 recorded cycles per
+checkpoint; the 10k-checkpoint block additionally captures all 10{,}000
+cycles continuously). Sensitivity per checkpoint
 was computed as the ratio of median magnetic to median force peak-to-peak
 amplitude ($S=\Delta B_z/\Delta F_z$), using ratio normalization to remove
 drive-amplitude changes; checkpoints with $>$9\% corrupted-packet rate were
