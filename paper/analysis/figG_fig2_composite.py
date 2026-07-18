@@ -123,16 +123,11 @@ def main():
 
     ax_at(M_L, y, a_w, h1).imshow(img_a, aspect="auto")
 
-    # b: placeholder only -- no faked content
-    axb = ax_at(x_b, y, b_w, h1)
-    axb.set_axis_on()
-    axb.set_xticks([]); axb.set_yticks([])
-    axb.set_facecolor("#f2f2f2")
-    for s in axb.spines.values():
-        s.set_color("#c8c8c8"); s.set_linewidth(0.8)
-    axb.text(0.5, 0.5, "Fabrication workflow\n(vector redraw pending)",
-             ha="center", va="center", fontsize=7.5, style="italic",
-             color="#909090", transform=axb.transAxes)
+    # b: team-made fabrication workflow schematic (real asset).
+    # Known typos in the source art ("Vaccum", "Demode") to fix in the
+    # final vector redraw; used as-is for the assembly draft.
+    img_b, _ = load(FIG_DIR / "assets" / "fig2b_fabrication_workflow.jpg")
+    ax_at(x_b, y, b_w, h1).imshow(img_b, aspect="auto")
 
     # c group: c1 stage overview on top, c2 side view | c3 cross-section below
     sub_kw = dict(fontsize=6.5, fontweight="bold", family="sans-serif",

@@ -51,6 +51,24 @@
 已有:`fig2e_geometry_sensitivity`(9 几何热图)、`fig2f_dynamics_durability`
 (15 万次疲劳+响应时间分布)、`fig5d_pulse_demo`(脉搏)、`edx_wind_preliminary`。
 
+## 三之二、2026-07-18 收到的示意图资产(`paper/figures/assets/`)
+
+来源:`~/Desktop/机械臂+风洞论文图/`。
+
+| 资产 | 去向 | 备注 |
+|---|---|---|
+| fig2b_fabrication_workflow.jpg (2243×1279) | **Fig. 2b,已接入拼版** | 原图两处英文拼写错误:"Vaccum"→Vacuum、"Demode"→Demould,矢量重绘时修正 |
+| fig1b_hand_exploded_render.png (原 26750×15148,入库缩至 4000px) | Fig. 1b / 4a | 超高清 CAD 渲染 |
+| fig5a_wind_tunnel_schematic.png (7070×4456) | Fig. 5a | 含 anemometer 的诚实风洞示意 |
+| fig5d_wrist_patch_schematic.jpg | Fig. 5d | 腕部佩戴+皮肤剖面 |
+| fig3f_bubble_touch_schematic.jpg | Fig. 3f | 指尖阵列钢球/气泡对比示意 |
+| concept_toc_graphic.jpg | TOC/概念 | 疑似 AI 生成,受 Nature 政策限制 |
+| inset1/2/3.png (仅 201px) | ⚠️ 太小不能印刷 | patch 实拍缩略图,**需原始高清照片** |
+
+⚠️ **政策提醒**:hand_array/airflow/pulse/bubble 若为 AI 工具生成,同样受
+Springer Nature 禁令约束;若为设计师手绘/真实 CAD 渲染则可用——投稿前需向
+期刊申明制作方式。建议保留源文件(.ai/.c4d/.blend 等)作为人工制作证据。
+
 ## 四、关键矛盾记录(需用户/实验方确认)
 
 1. **Ecoflex vs PDMS**:真实流程图写 Ecoflex,可靠性样品目录是 PDMS_NdFeB,
