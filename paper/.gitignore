@@ -7,3 +7,4 @@ main.out
 main.pdf
 # regenerable QC/analysis output (scripts in analysis/ reproduce these)
 analysis/out/
+analysis/__pycache__/
