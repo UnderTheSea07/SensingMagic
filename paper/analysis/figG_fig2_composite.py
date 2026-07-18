@@ -35,7 +35,7 @@ import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
 
 FIG_DIR = Path(__file__).resolve().parent.parent / "figures"
-SEM_DIR = FIG_DIR / "sem"
+SEM_DIR = FIG_DIR / "sem_hires"
 OUT_STEM = FIG_DIR / "fig2_composite"
 
 DPI = 300
@@ -72,9 +72,9 @@ def main():
     img_e, ar_e = load(FIG_DIR / "fig2e_geometry_sensitivity.png")
     img_f1, ar_f1 = load(FIG_DIR / "fig2f_response_event.png")
     img_f2, ar_f2 = load(FIG_DIR / "fig2f_dynamics_durability.png")
-    img_c1, ar_c1 = load(SEM_DIR / "sem_array_stage.png")
-    img_c2, ar_c2 = load(SEM_DIR / "sem_array_side.png")
-    img_c3, ar_c3 = load(SEM_DIR / "sem_cross_section_402um.png")
+    img_c1, ar_c1 = load(SEM_DIR / "101.jpg")          # stage overview, 400 um bar
+    img_c2, ar_c2 = load(SEM_DIR / "08-8-1-01.jpg")    # cilia close-up, 300 um bar
+    img_c3, ar_c3 = load(SEM_DIR / "05-3-04.jpg")      # cross-section, 100 um bar + 402.5 um
 
     usable = W - M_L - M_R
 
@@ -153,8 +153,8 @@ def main():
     # '402.5 um' annotation inside the c3 raster.
     y_note = y + h1 + 0.03
     fig.text((x_c + WC / 2) / W, (H - y_note) / H,
-             "scale: on-image annotation (cross-section);\n"
-             "bars to be added from SEM metadata",
+             "on-image scale bars: c1 400 \u03bcm, c2 300 \u03bcm,\n"
+             "c3 100 \u03bcm (+402.5 \u03bcm width annotation)",
              ha="center", va="top", fontsize=5.0, color="#666666",
              family="sans-serif", linespacing=1.25)
 
