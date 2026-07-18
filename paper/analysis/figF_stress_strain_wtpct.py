@@ -18,10 +18,17 @@ Inputs (Zwick exports):
 Outputs:
   paper/figures/fig2d_stress_strain_wtpct.{svg,pdf,png}
 
-Style: materials-journal convention -- serif (Times New Roman / STIX), white
+Style: sans-serif (DejaVu Sans, matching the other Fig. 2 panels), white
 background, no grid, four-sided box, inward ticks on all sides, light raw
 per-specimen curves + bold group mean, legend inside lower right with
 Et = mean ± s.d. computed from the summary sheet at runtime.
+
+Each specimen's curve is truncated at its break point (global maximum of the
+lightly smoothed stress): the Zwick export keeps a short post-break drop tail
+(up to ~50% strain of falling stress) which is NOT drawn. Visual smoothing is
+a centered moving average whose window shrinks at the ends (normalized 'same'
+convolution), so the curve ends exactly at the break point with no edge hooks.
+The group mean is drawn only up to the group's earliest break.
 """
 
 import os
@@ -32,12 +39,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib import font_manager
 
 DATA_DIR = ("/private/tmp/claude-502/-Users-arielzhang-Desktop-SensingMagic/"
             "617d7206-542d-4a74-bd36-6e9400bc4ca0/scratchpad/tensile/20241121/20241121")
 FIG_DIR = "/Users/arielzhang/Desktop/SensingMagic/paper/figures"
-BASENAME = "fig2d_stress_strain_wtpct"
+BASENAME = "fig2d_stress_strain_wtpct" + ("" if __import__("os").environ.get("SS_FONT", "serif") == "serif" else "_sans")
 
 # colorblind-safe ordered ramp (Paul Tol bright hues, low->high filler loading)
 GROUPS = [  # (file, wt%, color)
@@ -50,18 +56,24 @@ GROUPS = [  # (file, wt%, color)
 SUMMARY_SHEET = "测试结果"
 N_GRID = 900          # resample points per curve (visual only)
 SMOOTH_WIN = 41       # mild moving-average window on the raw trace (visual only)
+DETECT_WIN = 11       # light smoothing used only to locate the break point
+MIN_BREAK_STRAIN = 50.0   # ignore the initial toe/yield hump when locating it
 
 
 # ----------------------------------------------------------------------------- fonts
 def setup_style():
-    available = {f.name for f in font_manager.fontManager.ttflist}
-    serif_stack = ["STIXGeneral", "STIX Two Text", "DejaVu Serif"]
-    if "Times New Roman" in available:
-        serif_stack.insert(0, "Times New Roman")
+    """Sans-serif (DejaVu Sans), matching the rcParams family used by the
+    e/f source figures so the Fig. 2 composite has one typeface throughout.
+    Boxed axes with inward ticks are kept (layout convention, not a font)."""
     plt.rcParams.update({
-        "font.family": "serif",
-        "font.serif": serif_stack,
-        "mathtext.fontset": "stix",
+        # SS_FONT=serif (default, user spec: Times/STIX) or sans (composite)
+        **({"font.family": "serif",
+            "font.serif": ["Times New Roman", "STIXGeneral", "DejaVu Serif"],
+            "mathtext.fontset": "stix"}
+           if __import__("os").environ.get("SS_FONT", "serif") == "serif"
+           else {"font.family": "sans-serif",
+                 "font.sans-serif": ["DejaVu Sans"],
+                 "mathtext.fontset": "dejavusans"}),
         "figure.facecolor": "white",
         "axes.facecolor": "white",
         "axes.grid": False,
@@ -119,16 +131,49 @@ def read_specimen(ws, A0):
     return strain[keep], stress[keep]
 
 
+def centered_smooth(y, win):
+    """Centered moving average whose window shrinks symmetrically toward the
+    ends (normalized 'same' convolution) -> no edge bias, no end hooks."""
+    if win <= 1 or len(y) <= 3 * win:
+        return y
+    k = np.ones(win)
+    return np.convolve(y, k, mode="same") / np.convolve(np.ones(len(y)), k,
+                                                        mode="same")
+
+
+def truncate_at_break(strain, stress):
+    """Cut the curve at the specimen's break point and drop everything after.
+
+    The break point is the global maximum of the lightly smoothed stress past
+    MIN_BREAK_STRAIN. For a terminal fracture drop this is exactly the last
+    point before stress falls >3% below its running maximum, but unlike the
+    running-max test it is immune to the small yield hump these composites
+    show near ~50-90% strain (stress dips >3% there, then rises much higher).
+    """
+    det = centered_smooth(stress, DETECT_WIN)
+    if strain[-1] > MIN_BREAK_STRAIN:
+        det = np.where(strain < MIN_BREAK_STRAIN, -np.inf, det)
+    ib = int(np.argmax(det))
+    return strain[:ib + 1], stress[:ib + 1]
+
+
 def resample(strain, stress, n=N_GRID, win=SMOOTH_WIN):
-    """Mild smoothing + downsample onto a uniform strain grid (visual only)."""
-    if win > 1 and len(stress) > 3 * win:
-        k = np.ones(win) / win
-        stress = np.convolve(stress, k, mode="same")
-        # fix edge bias of 'same' convolution
-        stress[:win] = stress[win]
-        stress[-win:] = stress[-win - 1]
+    """Smooth (edge-aware, centered) + downsample onto a uniform strain grid
+    that ends exactly at the break strain (visual only). Called on already
+    truncated data, so no post-break samples can leak into the smoothing.
+
+    After smoothing, the curve is re-cut at the maximum of the SMOOTHED
+    stress: the detection window (DETECT_WIN) and the visual window (win)
+    peak a few samples apart, so without this the trailing average could dip
+    slightly and leave a micro-hook. Cutting at the smoothed maximum makes
+    'last point = highest point' true by construction -> no end hooks."""
+    stress = centered_smooth(stress, win)
     order = np.argsort(strain, kind="stable")
     s_sorted, y_sorted = strain[order], stress[order]
+    if s_sorted[-1] > MIN_BREAK_STRAIN:
+        masked = np.where(s_sorted < MIN_BREAK_STRAIN, -np.inf, y_sorted)
+        im = int(np.argmax(masked))
+        s_sorted, y_sorted = s_sorted[:im + 1], y_sorted[:im + 1]
     grid = np.linspace(0.0, s_sorted[-1], n)
     return grid, np.interp(grid, s_sorted, y_sorted)
 
@@ -138,7 +183,11 @@ def main():
     setup_style()
     os.makedirs(FIG_DIR, exist_ok=True)
 
-    fig, ax = plt.subplots(figsize=(4.6, 3.6), dpi=300)
+    # 3.9 x 2.7 in: in the Fig. 2 composite this panel is placed ~2.75 in
+    # wide (row height fixed by the SEM group), so a smaller canvas keeps the
+    # downscale near 0.7x and the tick/legend text print-legible (~6-8 pt
+    # effective instead of ~4-5 pt at the former 4.6 x 3.6 in canvas).
+    fig, ax = plt.subplots(figsize=(3.9, 2.7), dpi=300)
 
     handles, labels = [], []
     print("group summary (computed at runtime):")
@@ -152,12 +201,13 @@ def main():
         for sheet in spec_sheets:
             A0 = summary.get(sheet.strip(), {}).get("A0", np.nan)
             s, y = read_specimen(wb[sheet], A0)
+            s, y = truncate_at_break(s, y)   # nothing after break is kept
             curves.append(resample(s, y))
         wb.close()
 
-        # light per-specimen raw curves
+        # light per-specimen raw curves, each ending at its break point
         for g, y in curves:
-            ax.plot(g, y, color=color, lw=0.6, alpha=0.35, zorder=2)
+            ax.plot(g, y, color=color, lw=0.6, alpha=0.3, zorder=2)
 
         # bold group mean, only where ALL specimens are still intact
         cutoff = min(g[-1] for g, _ in curves)
@@ -167,15 +217,16 @@ def main():
 
         et = np.array([v["Et"] for v in summary.values()])
         et_m, et_s = et.mean(), et.std(ddof=1)
+        breaks = ", ".join(f"{g[-1]:.0f}" for g, _ in curves)
         print(f"  {wt} wt%: n={len(curves)}, Et = {et_m:.3f} ± {et_s:.3f} MPa, "
-              f"mean cut at {cutoff:.0f}% strain")
+              f"breaks at [{breaks}]% strain, mean cut at {cutoff:.0f}%")
 
         handles.append(Line2D([0], [0], color=color, lw=1.8))
         labels.append(f"{wt} wt%  $E_t$ = {et_m:.3f} $\\pm$ {et_s:.3f} MPa")
 
     ax.set_xlabel("Strain (%)", fontsize=11)
     ax.set_ylabel("Stress (MPa)", fontsize=11)
-    ax.set_xlim(0, 800)
+    ax.set_xlim(0, 750)   # last break is at 713% strain (763% was drop tail)
     ax.set_ylim(0, 1.25)
     ax.tick_params(direction="in", top=True, right=True, labelsize=9.5,
                    length=3.5, width=0.8)

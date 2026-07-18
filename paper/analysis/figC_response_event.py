@@ -5,7 +5,10 @@ figC_response_event.py
 Fig. 2f — dynamic response and repeatability of the magnetic-cilia patch
 (manual loading, hand-pressed taps).
 
-Panel a: representative tap-response event from the raw high-rate recording
+Sub-panels are labelled f1/f2/f3 (neutral, to avoid clashing with the
+top-level a-f letters of the Fig. 2 composite).
+
+Panel f1: representative tap-response event from the raw high-rate recording
          (headerless CSV [t_ms, Bx, By, Bz], fs ~ 1 kHz). Bad packets (rows
          where the axes jump to fixed clipped levels) are DROPPED (never
          interpolated): a row is discarded when any axis deviates by more
@@ -13,8 +16,8 @@ Panel a: representative tap-response event from the raw high-rate recording
          rolling median. The 10-90 % rise time and 90-10 % recovery time are
          computed from the data (crossings on a 7-sample moving average,
          linear interpolation between samples).
-Panel b: 5 aligned press-release cycles (Fig4a_overlay.csv) + their mean.
-Panel c: peak |dB| across 20 manual trials (Fig4b_peaks.csv) with mean,
+Panel f2: 5 aligned press-release cycles (Fig4a_overlay.csv) + their mean.
+Panel f3: peak |dB| across 20 manual trials (Fig4b_peaks.csv) with mean,
          +-1 s.d. band and the computed CV%.
 
 All annotated numbers are computed here from the source data. Units: uT.
@@ -174,7 +177,7 @@ ax.text(t10f + 6, yarr, f"recovery 90–10%\n{recov_ms:.0f} ms",
         ha="left", va="center", fontsize=6)
 ax.set_xlabel("Time (ms)")
 ax.set_ylabel("|ΔB$_z$| (µT)")
-ax.set_title("a  Tap response event (manual loading)", loc="left")
+ax.set_title("f1  Tap response event (manual loading)", loc="left")
 ax.set_xlim(-200, 200)
 ax.set_ylim(0, A + 27)
 ax.legend(frameon=False, loc="center right", bbox_to_anchor=(1.0, 0.29),
@@ -188,7 +191,7 @@ for j, c in enumerate(cyc_cols):
 ax.plot(ov["time_s"], ov_mean, color=ORANGE, lw=1.0, label="mean")
 ax.set_xlabel("Time (s)")
 ax.set_ylabel("ΔB$_z$ (µT)")
-ax.set_title("b  Cycle overlay (n = 5)", loc="left")
+ax.set_title("f2  Cycle overlay (n = 5)", loc="left")
 ax.legend(frameon=False, loc="upper right", handlelength=1.4,
           borderaxespad=0.2, labelspacing=0.3)
 
@@ -203,7 +206,7 @@ ax.text(0.03, 0.06,
         transform=ax.transAxes, ha="left", va="bottom", fontsize=6)
 ax.set_xlabel("Trial")
 ax.set_ylabel("|ΔB| peak (µT)")
-ax.set_title("c  Peak amplitude (manual taps)", loc="left")
+ax.set_title("f3  Peak amplitude (manual taps)", loc="left")
 ax.set_xlim(0, 21)
 ax.set_ylim(0, 1300)
 ax.set_xticks([1, 5, 10, 15, 20])

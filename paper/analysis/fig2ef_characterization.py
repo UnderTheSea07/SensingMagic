@@ -10,6 +10,10 @@ publication. Sources (all spot-checkable CSV):
   - Fig8_all_events_stats.csv        (81 tap events, response/recovery)
 Outputs: paper/figures/fig2e_geometry_sensitivity.{pdf,png},
          paper/figures/fig2f_dynamics_durability.{pdf,png}
+
+The fig2f sub-panels are labelled f4/f5 (continuing f1-f3 of
+fig2f_response_event) so they cannot clash with the top-level a-f
+letters of the Fig. 2 composite.
 """
 import glob
 import os
@@ -109,7 +113,7 @@ def fig2f():
     axa.set_xlabel("Compression cycles ($\\times 10^3$)")
     axa.set_ylabel("Sensitivity $\\Delta B_z/\\Delta F_z$ (µT N$^{-1}$)")
     axa.legend(frameon=False, title="sample", loc="center left")
-    axa.set_title("a  150k-cycle durability (open = >9% bad packets)",
+    axa.set_title("f4  150k-cycle durability (open = >9% bad packets)",
                   loc="left")
 
     axb = axes[1]
@@ -124,7 +128,7 @@ def fig2f():
                  fontsize=6, xytext=(4, 0), textcoords="offset points")
     axb.set_xlabel("10–90% response time (ms)")
     axb.set_ylabel("Events")
-    axb.set_title(f"b  Tap response ($n$={len(resp)})", loc="left")
+    axb.set_title(f"f5  Tap response ($n$={len(resp)})", loc="left")
 
     for ax in axes:
         ax.spines[["top", "right"]].set_visible(False)
