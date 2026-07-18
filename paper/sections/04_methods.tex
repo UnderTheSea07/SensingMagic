@@ -52,50 +52,137 @@ the array config; single-sensor fastmode logging measured at 1000~Hz
 rate \dataneeded{Hz} (not chip nominal); firmware \dataneeded{version}.
 
 \subsection*{xArm--Nano17 loading protocol}
-UFactory~xArm (\dataneeded{model}) with ATI~Nano17 (\dataneeded{calibration,
-resolution}); non-magnetic probe (\dataneeded{PEEK/nylon/acrylic/ceramic},
-tip geometry); approach/hold/retract profile \dataneeded{speeds, dwell}.
+Controlled loading used a UFactory~xArm (\dataneeded{model}) carrying an
+ATI~Nano17 six-axis force/torque sensor (\dataneeded{calibration, resolution})
+with a non-magnetic probe (\dataneeded{PEEK/nylon/acrylic/ceramic};
+\dataneeded{tip geometry, e.g.\ 2~mm hemisphere}). Before each campaign we
+verified that (i) the probe raised no magnetic signal above $3\sigma$ of the
+sensor noise when hovered 1~mm above the skin without contact, (ii) the arm
+executing a typical trajectory 5~cm above the sample produced motion-induced
+$|\Delta\mathbf{B}|$ below $3\sigma$ (otherwise the standoff was increased and
+the residual reported), and (iii) the Nano17 zero drifted less than
+\dataneeded{mN} over 5~min. Each trial followed a fixed profile: pre-contact
+baseline, approach at \dataneeded{approach speed, mm\,s$^{-1}$} to the target
+normal force, a hold of \dataneeded{hold duration, s}, then retraction, with
+force setpoints and, for shear, in-plane displacement commanded in closed loop
+against the Nano17 reading.
 
 \subsection*{Time synchronization}
-MLX90393, Nano17, xArm and video synchronized via \dataneeded{trigger/method};
-residual sync error \dataneeded{ms}.
+The MLX90393 array (\dataneeded{ODR, Hz}), Nano17 (\dataneeded{rate, Hz}), xArm
+pose stream and video were logged on a single host, each sample carrying a host
+timestamp. Streams were hard-aligned per trial to a common event---a brief
+probe tap (contact-to-release $<$100~ms) at trial onset that appears
+simultaneously as a force spike and a magnetic transient---giving a residual
+synchronization error of \dataneeded{ms} (verified by 10 repeated taps).
 
 \subsection*{Baseline correction}
-Per-trial baseline from \dataneeded{pre-contact window, s}; drift handling
-\dataneeded{method}.
+For every trial the per-channel baseline was the mean over a
+\dataneeded{pre-contact window, s} pre-contact window and was subtracted to
+give $\Delta\mathbf{B}$. Slow drift was monitored by returning the probe to a
+fixed reference position every \dataneeded{$N$} trials (anchor trials); anchor
+drift exceeding \dataneeded{threshold, $\mu$T} triggered re-baselining of the
+intervening block. Trials logged as mechanically disturbed were excluded and
+re-recorded.
 
 \subsection*{Temperature compensation}
-MLX90393 temperature channel used to \dataneeded{compensation model}.
+The MLX90393 on-die temperature channel was recorded continuously. A
+per-channel affine temperature model $\mathbf{B}_{\mathrm{corr}}=\mathbf{B}-
+\boldsymbol{\beta}(T-T_0)$ was fitted on no-load segments spanning the working
+temperature range and applied before baseline subtraction
+(\dataneeded{fitted $\boldsymbol{\beta}$ range}).
 
 \subsection*{Signal filtering}
-\dataneeded{filter type, cutoff frequencies} for contact, airflow and pulse
-bands separately; software \dataneeded{SciPy/version}.
+Distinct bands were used for the three regimes and reported separately:
+quasi-static contact (\dataneeded{low-pass cutoff, Hz}), airflow-induced
+fluctuation (band-pass \dataneeded{f1--f2, Hz}) and pulse (band-pass
+\dataneeded{f1--f2, Hz}; a preliminary 0.5--10~Hz Butterworth was used for the
+demonstration in Extended Data). All filters were zero-phase (forward--backward)
+Butterworth of order \dataneeded{order}, implemented in SciPy
+(\dataneeded{version}); filter type, order and cutoffs are stated with every
+result.
+
+\subsection*{Motion-artifact suppression}
+A cilia-free reference MLX90393 placed away from the contact surface
+(\dataneeded{location}) captured common-mode field variation from posture,
+cables and ambient sources. Each sensing node was corrected as
+$\Delta\mathbf{B}_{i,\mathrm{corr}}=\Delta\mathbf{B}_i-\alpha_i
+\Delta\mathbf{B}_{\mathrm{ref}}$, with per-node gains $\alpha_i$ fitted by
+least squares on no-contact motion recordings. Suppression was quantified by
+the contact-to-motion ratio $\mathrm{CMR}=20\log_{10}(A_{\mathrm{contact}}/
+A_{\mathrm{motion}})$ before and after correction, and by the false-positive
+rate on held-out no-contact motions.
 
 \subsection*{Inverse model}
-Feature vector (12 channels for $2\times2$), model architectures
-(nearest-neighbour, ridge/polynomial, random forest, MLP), hyperparameters
-\dataneeded{settings}, training library \dataneeded{scikit-learn/PyTorch version}.
+The feature vector was the concatenated tri-axis reading of every node in a
+unit (12 channels for the $2\times2$). Four model families were compared:
+nearest-neighbour fingerprint matching, ridge/polynomial regression, random
+forest and a compact multilayer perceptron. Targets were predicted in three
+cumulative stages---$(x,y)$; $(x,y,F_n)$; $(x,y,F_n,F_x,F_y)$---so that added
+outputs could not degrade earlier ones unnoticed. Hyperparameters were selected
+on the validation split only (\dataneeded{search space and selected values});
+training used \dataneeded{scikit-learn/PyTorch version}.
 
 \subsection*{Train/validation/test split}
-Split by position (60/20/20), no frame-level leakage across loading windows;
-cross-session protocol \dataneeded{sessions}.
+Splits were made \emph{by contact position}: of the grid positions,
+\dataneeded{n} were assigned to training, \dataneeded{n} to validation and
+\dataneeded{n} to an unseen-position test set (60/20/20), so that no test
+position appeared during training. No time frame from a given trial was shared
+across splits, preventing frame-level leakage. Generalization across
+re-mounting was assessed by training and testing on different sessions
+(\dataneeded{number of sessions}); the unseen-position test set was evaluated
+once, at the end.
 
 \subsection*{Statistical analysis}
-$n$ = independent devices/subjects (not frames); report individual points with
-mean\,$\pm$\,s.d.\ or 95\% CI; two-sided tests \dataneeded{test names}, exact
-$P$ values, effect sizes, and \dataneeded{multiple-comparison correction}.
+Throughout, $n$ denotes independent devices, patches or subjects, reported
+separately from technical repeats; figures show individual points with
+mean\,$\pm$\,s.d.\ or 95\% confidence intervals. Group comparisons used
+two-sided tests (\dataneeded{test names, e.g.\ ANOVA with Holm correction})
+with exact $P$ values, effect sizes and \dataneeded{multiple-comparison
+correction}; confidence intervals for the cilia gain $G_{\mathrm{cilia}}$ were
+obtained by bootstrap over independent patches. Condition order was randomized
+and the randomization seed stored with each dataset.
 
 \subsection*{Wind-tunnel setup}
-\dataneeded{tunnel/fan model}, reference anemometer \dataneeded{model,
-accuracy}, speeds \dataneeded{levels}, randomized order, \dataneeded{runs}.
+Airflow was generated by \dataneeded{tunnel/fan model} and measured with a
+reference anemometer (\dataneeded{model, accuracy}). To separate cilia
+aeroelastic response from fan-motor electromagnetic pickup, every speed was
+also recorded with a bare (cilia-free) sensor and with the fan running but the
+flow ducted away (blocked-duct sham). Recordings alternated flow-off and
+flow-on intervals within each file so that a within-file baseline removes
+drift. Speeds \dataneeded{levels, incl.\ $<$2~m\,s$^{-1}$} were presented in
+randomized order with \dataneeded{runs, $\geq$5} independent runs each; the
+2025-07-17 single-sensor session that lacked these controls is documented as
+insufficient in the Extended Data.
 
 \subsection*{Pulse experiment and ethics}
-Approved by \dataneeded{IRB/committee, protocol number}; informed consent
-obtained. Subjects $n=$~\dataneeded{10--20}; synchronized ECG
-(\dataneeded{device}) and preferably PPG; patch location, attachment pressure,
-wrist side and posture recorded.
+The study was approved by \dataneeded{IRB/committee, protocol number} and all
+participants gave written informed consent. Radial-artery recordings from
+$n=$~\dataneeded{10--20} subjects were acquired with hardware-synchronized ECG
+(\dataneeded{device}) and, where available, PPG, the reference and magnetic
+streams sharing a common trigger (alignment verified to \dataneeded{ms}). Each
+subject completed \dataneeded{sessions} sessions with re-attachment between
+sessions; patch location, attachment pressure, wrist side, posture and subject
+ID were logged. Heart-rate accuracy, ECG-to-pulse delay, waveform correlation,
+SNR and beat-to-beat variability were computed against the ECG reference;
+morphological features were reported only where stable across beats and
+subjects.
 
 \subsection*{Data and code availability}
-Data at \dataneeded{repository/DOI}; analysis code at
-\dataneeded{repository URL} (see the CSV logs and analysis scripts in this
-project as the working basis).
+The datasets generated and analysed in this study are available at
+\dataneeded{repository/DOI}. Analysis code---including the wind and pulse
+processing pipelines and figure scripts used here---is available at
+\dataneeded{repository URL}.
+
+\section*{End matter}
+
+\paragraph{Acknowledgements.} \dataneeded{funding sources and grant numbers;
+facilities; individual acknowledgements}
+
+\paragraph{Author contributions.} \dataneeded{per-author contributions using
+CRediT roles}
+
+\paragraph{Competing interests.} \dataneeded{declare any competing interests,
+or state that the authors declare none}
+
+\paragraph{Additional information.} Correspondence and requests for materials
+should be addressed to \dataneeded{corresponding author}.
