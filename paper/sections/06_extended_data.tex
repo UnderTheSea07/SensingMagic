@@ -1,0 +1,65 @@
+% ======================================================================
+% EXTENDED DATA / SUPPLEMENTARY — captions and inventory only.
+% ======================================================================
+\section*{Extended Data and Supplementary Information}
+
+\paragraph{Extended Data Fig. 1 $\vert$ Full geometry and control matrix.}
+All six cilia geometries against flat film, short pillars, non-magnetic cilia
+and bare sensor; per-condition sensitivity, hysteresis and response time.
+\dataneeded{full matrix values}
+
+\paragraph{Extended Data Fig. 2 $\vert$ Decoding validation.}
+Train/validation/test split by position, cross-session results and model
+comparison. \dataneeded{tables/curves}
+
+\paragraph{Extended Data Fig. 3 $\vert$ Artifact suppression.}
+No-contact motion artifacts, reference-sensor compensation and before/after CMR.
+\dataneeded{values}
+
+\paragraph{Extended Data Fig. 4 $\vert$ 44-node characterization.}
+Per-node baseline, gain, noise, orientation and dead channels.
+\dataneeded{node table}
+
+\paragraph{Extended Data Fig. 5 $\vert$ 1$\times$4 strip.}
+1D localization, sliding and slip detection. \dataneeded{values}
+
+\paragraph{Extended Data Fig. 6 $\vert$ Full airflow results.}
+All wind-tunnel speeds, poses and dynamic profiles. \dataneeded{values}
+
+\paragraph{Extended Data Fig. 7 $\vert$ Full pulse results.}
+All subjects, sessions and positions with ECG (and PPG) references.
+\dataneeded{values}
+
+\section*{Preliminary single-sensor data (internal; to be superseded)}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig5d_pulse_demo.pdf}
+\caption*{\textbf{Preliminary Fig.~5d candidate $\vert$ Pulse micro-vibration
+demonstration (real data, single MLX90393, L8/d0.8 cilia, 500~Hz).}
+Left: raw and band-passed (0.5--10~Hz) $B_z$ at the radial artery.
+Middle: beat detection on the band-passed trace. Right: beat-aligned
+individual beats (grey) and their mean ($n=95$ beats, peak
+$\approx$3.6~$\mu$T), showing a coherent systolic waveform with a secondary
+shoulder. Qualitative demonstration only: no synchronized ECG exists for this
+recording, so no heart-rate accuracy or timing claim is made
+(notes/pulse\_data\_verdict.md).}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{edx_wind_preliminary.pdf}
+\caption*{\textbf{Preliminary airflow data $\vert$ Why the 2025-07-17 session
+cannot yield a $\Delta B$--$v$ calibration.} \textbf{(a)}~Band-limited RMS is
+non-monotonic in speed. \textbf{(b)}~The response concentrates in narrowband
+peaks at fan-rotation harmonics, indistinguishable from fan-motor magnetic
+pickup without a bare-sensor control; the broadband floor is
+speed-independent. \textbf{(c)}~The steady DC shift follows trial order
+(drift and a setup discontinuity at trial~9), not wind speed. Re-measurement
+SOP: notes/acquisition\_SOPs.md, SOP-4.}
+\end{figure}
+
+\paragraph{Supplementary Videos.}
+(1) $2\times2$ inverse decoding; (2) bubble touch; (3) 44-node real-time map;
+(4) no-contact artifact test; (5) wind-tunnel pose change;
+(6) ECG-synchronized pulse.

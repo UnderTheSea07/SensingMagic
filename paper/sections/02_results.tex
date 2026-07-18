@@ -1,0 +1,172 @@
+% ======================================================================
+% RESULTS — six subsections mapped to Fig. 1–5.
+% Structure and claim-gating only; every quantitative statement is a
+% placeholder. No experimental results are invented.
+% ======================================================================
+\section*{Results}
+
+% ----------------------------------------------------------------------
+\subsection*{System design for embodied perception of subtle mechanical stimuli}
+% -> Fig. 1
+The tactile skin integrates a passive magnetic cilia layer, a soft elastomer/
+adhesive interface, a distributed MLX90393 tri-axis magnetic sensing layer and
+a hand-shaped flexible printed circuit (Fig.~1). Cilia are confined to the
+palmar side---palm, finger pads and fingertips---so that the sensing surface
+matches the contact surface of a grasping hand (Fig.~1a). Weak mechanical
+inputs deflect the cilia, producing distinct three-axis magnetic signatures
+under normal versus shear loading that are sampled by the underlying sensors
+(Fig.~1d). Sparse tri-axis sampling from a local $2\times2$ unit, a $1\times4$
+strip and the full 44-node array is combined with calibrated spatial
+reconstruction to move from local decoding to whole-hand mapping (Fig.~1e).
+The integrated system comprises 44 MLX90393 nodes with
+\dataneeded{number of effective/active nodes} active channels covering
+\dataneeded{palmar coverage area, cm$^2$}, with a total thickness of
+\dataneeded{system thickness, mm} and mass of \dataneeded{system mass, g}.
+It streams a local $2\times2$ frame at \dataneeded{2x2 frame rate, Hz} and a
+full 44-node frame at \dataneeded{full-hand frame rate, Hz}, with a dropped-frame
+rate of \dataneeded{dropped-frame \% over 10 min} over 10~min of continuous
+acquisition and a power draw of \dataneeded{system power, mW}.
+
+% ----------------------------------------------------------------------
+\subsection*{Geometry-dependent amplification and physical characterization of magnetic cilia}
+% -> Fig. 2
+We fabricated NdFeB--elastomer cilia by mixing, degassing, mould filling,
+magnetic pre-alignment, curing and demoulding, followed by final magnetization
+(Fig.~2a,b; Methods). Cilia were produced across a geometry matrix of lengths
+$L=3,5,8$~mm and diameters $d=0.5,0.8$~mm at a pitch of
+\dataneeded{measured pitch $s$, mm} (Fig.~2c). For each geometry we measured
+\dataneeded{$n$ cilia measured per geometry, target $\geq 30$ from $\geq 3$
+patches} cilia and report mean\,$\pm$\,s.d.\ of height, diameter and pitch.
+Mechanical characterization of non-magnetic and $x$/$y$/$z$-magnetized
+specimens ($n=$~\dataneeded{independent specimens per group, target 5 (>=)})
+gives a modulus of \dataneeded{modulus, kPa} and loading--unloading hysteresis
+of \dataneeded{mechanical hysteresis, \%} (Fig.~2d).
+
+To test whether the cilia geometry enhances weak-stimulus response, we compared
+each of the six geometries against matched controls---a flat magnetic film,
+short magnetic pillars, non-magnetic cilia and a bare MLX90393---under
+\dataneeded{normal-force levels, e.g.\ 10/20/50/100~mN} normal and
+\dataneeded{shear-force levels} shear loads
+($n=$~\dataneeded{independent patches, target 3} patches,
+\dataneeded{repeats per condition} repeats). We define the force sensitivity
+$S=\mathrm{d}|\Delta\mathbf{B}|/\mathrm{d}F$, the cilia gain
+$G_{\mathrm{cilia}}=S_{\mathrm{cilia}}/S_{\mathrm{flat}}$ and the limit of
+detection $\mathrm{LOD}=3\sigma_B/S$. The optimal geometry
+\dataneeded{best $L\times d$} reaches a sensitivity of \dataneeded{$S$, units}
+and a gain of \dataneeded{$G_{\mathrm{cilia}}$ with 95\% CI} over the matched
+flat film, with an LOD of \dataneeded{LOD, mN} (Fig.~2e). Dynamic
+characterization gives a rise time of \dataneeded{rise time, ms}, a recovery
+time of \dataneeded{recovery time, ms} and a flat frequency response up to
+\dataneeded{bandwidth, Hz}; durability over \dataneeded{cycles, target
+$\geq$10{,}000} cycles and baseline drift of \dataneeded{drift over $\geq$30~min}
+confirm stability (Fig.~2f).
+
+\noindent\textit{Claim gate.} The term ``cilia-amplified'' is used only if the
+cilia group significantly exceeds the flat control with a defined gain across
+$\geq 3$ independent devices and statistical significance, after controlling for
+total magnetic material and no-load field; otherwise we use ``cilia-enhanced''
+or ``magnetic cilia tactile skin'' (see notes/claims\_table.md).
+
+% ----------------------------------------------------------------------
+\subsection*{Local tri-axis sensing and unseen-position inverse decoding}
+% -> Fig. 3a–e
+A local $2\times2$ unit of four MLX90393 sensors (12 channels: 4 sensors
+$\times$ $B_x,B_y,B_z$) at a sensor pitch of \dataneeded{sensor pitch, mm}
+(Fig.~3a) was calibrated on a UFactory~xArm with an ATI~Nano17 force/torque
+sensor and a non-magnetic probe (Fig.~3b). Tri-axis fingerprints were recorded
+over normal forces $F_n=\dataneeded{levels, e.g.\ 10/20/50/100~mN}$, shear
+forces $F_s=\dataneeded{levels}$ and directions
+$\theta=$~\dataneeded{angles, e.g.\ 0--315 deg}
+($n=$~\dataneeded{repeats}), revealing distinct normal/shear responses and a
+cross-talk of \dataneeded{normal/shear cross-talk, \%} (Fig.~3c).
+
+For inverse decoding we sampled a \dataneeded{grid, e.g.\ $7\times7=49$}
+position grid at \dataneeded{force levels} forces with
+\dataneeded{repeats} repeats (\dataneeded{total trials} trials total), splitting
+strictly by position (60\% train / 20\% validation / 20\% unseen test) with no
+loading-time frame shared across splits (Fig.~3d; Methods). Baseline models
+(nearest-neighbour fingerprint, ridge/polynomial regression, random forest and
+a compact MLP) were compared in three stages: position only; position + $F_n$;
+and position + $F_n$ + $F_x,F_y$. On the unseen-position test set the best model
+achieves a localization RMSE of \dataneeded{localization RMSE, mm}
+(95th percentile \dataneeded{p95 localization error, mm}), a force error of
+\dataneeded{force NRMSE, \%} and a median direction error of
+\dataneeded{direction error, deg}, with cross-session performance of
+\dataneeded{cross-session error} (Fig.~3e). A localization RMSE below the sensor
+pitch is required before ``local spatial resolution'' is claimed.
+
+% ----------------------------------------------------------------------
+\subsection*{Ultralight bubble-touch perception}
+% -> Fig. 3f
+As an ultralight-contact demonstration (not a detection-limit measurement), we
+released \dataneeded{number of bubbles, target $\geq 20$} soap bubbles across
+\dataneeded{bubble-size ranges, target 3} size ranges onto the local unit,
+together with \dataneeded{sham trials, target $\geq 2$} no-contact sham trials,
+under synchronized video (Fig.~3f). Approach, contact, deformation and release
+produced a peak $|\Delta\mathbf{B}|$ of \dataneeded{peak $|\Delta B|$, units}
+at an SNR of \dataneeded{SNR, dB}, and predicted contact positions matched the
+video frames. A bubble of estimated mass \dataneeded{estimated bubble mass, mg}
+was reliably detected and localized; we do not interpret this as a calibrated
+force detection limit.
+
+% ----------------------------------------------------------------------
+\subsection*{Full-hand integration, artifact suppression and spatial tactile mapping}
+% -> Fig. 4
+The local capability was scaled to a 44-node hand-shaped FPCB spanning
+fingertip, finger pad, palm and thumb regions with per-node coordinates and
+orientations (Fig.~4a,b; Extended Data). Because whole-hand maps can be
+corrupted by posture and field artifacts, we recorded no-contact motions---open
+hand, individual finger flexion, fist, wrist pitch/roll, whole-hand rotation and
+cable movement ($n=$~\dataneeded{repeats per motion, target 10})---alongside
+standard contacts (palm 50~mN, fingertip 30~mN, thumb 30~mN). We quantify a
+contact-to-motion ratio $\mathrm{CMR}=20\log_{10}(A_{\mathrm{contact}}/
+A_{\mathrm{motion}})$ of \dataneeded{CMR before correction, dB}, improved to
+\dataneeded{CMR after correction, dB} after reference-sensor compensation
+$\Delta\mathbf{B}_{i,\mathrm{corr}}=\Delta\mathbf{B}_i-\alpha_i
+\Delta\mathbf{B}_{\mathrm{ref}}$, reducing the false-positive rate to
+\dataneeded{false-positive rate, \%} (Fig.~4c).
+
+On a fixed hand model we validated \dataneeded{ground-truth positions, target 30}
+known positions at \dataneeded{force levels} forces
+(\dataneeded{total trials} trials), obtaining a localization error of
+\dataneeded{full-hand localization error, mm}, a region confusion accuracy of
+\dataneeded{region accuracy, \%} and a false-hotspot ratio of
+\dataneeded{false-hotspot ratio} (Fig.~4d). Whole-hand response maps for palm
+press, fingertip pinch, cylinder and ball grasp, lateral shear and gentle
+contact ($n=$~\dataneeded{repeats per scenario, target 10}) are shown on a common
+color scale (Fig.~4e); force-calibrated $F_n,F_x,F_y$ maps are reported only
+after per-node calibration, otherwise $|\Delta\mathbf{B}|$ and axis-resolved
+maps are shown. Conformability under bending and wrapping, and grasp-state
+discrimination across fist, cylinder and sphere, are characterized with a
+sensitivity change of \dataneeded{sensitivity change after bending, \%} and a
+sensor failure rate of \dataneeded{failure rate after bending cycles, \%}
+(Fig.~4f). Absent feedback experiments, we describe this as grasp-state
+discrimination and distributed contact readout rather than closed-loop control.
+
+% ----------------------------------------------------------------------
+\subsection*{Perception of weak airflow and physiological pulse micro-vibrations}
+% -> Fig. 5
+Finally, we tested whether one platform senses both external environmental
+perturbation and internal physiological micro-vibration. For airflow, we
+calibrated the response against a reference anemometer over wind speeds
+\dataneeded{wind speeds, e.g.\ 0--5~m\,s$^{-1}$}
+(\dataneeded{runs per speed, target 5} runs, randomized order), obtaining a
+$\Delta B$--$v$ relationship of \dataneeded{fit form and $R^2$}, a response time
+of \dataneeded{airflow response time, s} and up/down hysteresis of
+\dataneeded{airflow hysteresis, \%} (Fig.~5a). At a fixed speed of
+\dataneeded{fixed speed, m\,s$^{-1}$} across hand poses (palm flat, fingers
+flexed, side, back, partial fist; $n=$~\dataneeded{repeats}) we mapped the
+spatial distribution of airflow-induced tactile responses---not a resolved flow
+field---(Fig.~5b), and tracked dynamic step, staircase and random airflow with a
+correlation of \dataneeded{airflow tracking correlation} (Fig.~5c).
+
+For pulse sensing (under ethics approval and informed consent; Methods), a
+palmar/wrist patch recorded radial-artery micro-vibrations synchronized with
+ECG in \dataneeded{number of subjects, target 10--20} subjects across
+\dataneeded{sessions per subject} sessions with re-attachment (Fig.~5d).
+Beat segmentation gives a heart-rate MAE of \dataneeded{HR MAE, bpm} against
+ECG, an ECG-to-pulse delay of \dataneeded{pulse transit delay, ms}, a waveform
+SNR of \dataneeded{pulse SNR, dB} and beat-to-beat CV of \dataneeded{beat CV, \%}
+(Fig.~5e). Multi-position amplitude maps (centre, radial, ulnar, proximal,
+distal offsets) show the spatial dependence of the pulse signal (Fig.~5f). The
+dicrotic notch is reported only where it is stable across beats and subjects.

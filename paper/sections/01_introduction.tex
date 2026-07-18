@@ -1,0 +1,60 @@
+% ======================================================================
+% INTRODUCTION (4–5 paragraphs)
+% P1 field need -> P2 limits of existing methods -> P3 why cilia ->
+% P4 contributions -> P5 significance.
+% Citations are placeholders (\refneeded) — do NOT invent references.
+% ======================================================================
+\section*{Introduction}
+
+Embodied intelligence, whether in robotic manipulators or on-body wearable
+interfaces, depends on tactile sensing that is simultaneously large-area,
+mechanically compliant, multi-axis, dynamic and sensitive to weak forces
+\refneeded{embodied tactile perception reviews}. Dexterous manipulation and
+safe human contact require resolving not only firm grasping loads but also
+light touch, shear, incipient slip, weak airflow and even physiological
+micro-vibrations such as the pulse \refneeded{manipulation and slip sensing}.
+Yet most tactile platforms are optimized for a narrow slice of this space, and
+no single skin resolves subtle, spatially distributed and rapidly varying
+mechanical stimuli across an entire hand.
+
+Existing approaches each face structural trade-offs. Capacitive and
+piezoresistive skins scale to large areas but suffer from dense interconnect
+routing, cross-talk, baseline drift and limited weak-force resolution
+\refneeded{capacitive/piezoresistive tactile skins}. Piezoelectric and
+triboelectric devices excel at dynamic transients but respond poorly to
+sustained static loads \refneeded{piezoelectric tactile}. Vision-based tactile
+sensors achieve high spatial resolution but require an internal camera,
+illumination and per-contact computation, constraining thickness, curvature
+and integration density \refneeded{vision-based tactile}. Conventional magnetic
+skins offer contactless, drift-tolerant, multi-axis readout, but their planar
+magnet-film geometries often limit weak-stimulus sensitivity, directional
+decoupling or scalable coverage \refneeded{magnetic tactile skins}.
+
+Biological systems resolve weak mechanical signals using slender,
+high-aspect-ratio appendages---mammalian whiskers, insect sensilla and hair-cell
+structures---that convert faint airflow, contact and vibration into amplified
+mechanical deflection \refneeded{biological hair sensors}. We translate this
+principle into an ordered array of magnetized elastomer cilia. Their high
+aspect ratio makes them compliant to weak shear, flow and vibration; because
+transduction is magnetic and read out by underlying tri-axis sensors, the cilia
+require no individual wiring and act as a passive mechanical amplification layer
+that is naturally compatible with sparse, distributed magnetic sampling.
+
+Here we report a magnetic cilia tactile skin and validate it against five
+questions: why cilia rather than a flat magnetic film; whether a local
+$2\times2$ tri-axis unit can invert contact position, force and direction at
+unseen locations; whether this local capability scales to a 44-node full-hand
+array; whether the resulting whole-hand maps reflect true contact rather than
+posture, geomagnetic or cable-motion artifacts; and whether the platform
+captures weak dynamic disturbances---airflow and pulse---that rigid force
+sensors miss. Our contributions are (i) a geometry-optimized magnetic cilia
+transduction layer with a quantified enhancement over matched flat controls,
+(ii) local $2\times2$ inverse decoding validated on unseen positions,
+(iii) a 44-node full-hand array with explicit motion-artifact suppression and
+trustworthy spatial mapping, and (iv) shared sensing of weak external airflow
+and internal pulse micro-vibrations on one platform.
+
+Together these results position magnetic cilia as a scalable mechanical
+transduction layer for embodied perception, with implications for compliant
+robotics, wearable tactile interfaces and the monitoring of subtle
+environmental and physiological signals \refneeded{embodied sensing outlook}.

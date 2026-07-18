@@ -1,0 +1,101 @@
+% ======================================================================
+% METHODS — 21 subsections, each to be written to reproducibility.
+% All device models, rates, cutoffs, versions, repeats -> \dataneeded.
+% ======================================================================
+\section*{Methods}
+
+\subsection*{Materials and magnetic particle preparation}
+NdFeB powder (\dataneeded{grade, particle size, supplier}) was combined with
+\dataneeded{elastomer: Ecoflex/PDMS grade} at \dataneeded{NdFeB wt\%}. Record
+particle size distribution, weight fraction and mixing ratio.
+
+\subsection*{Cilia mould design and fabrication}
+Moulds (\dataneeded{material, machining/printing method, resolution}) defined
+cilia of $L=3,5,8$~mm, $d=0.5,0.8$~mm at pitch \dataneeded{pitch $s$}.
+Process: mixing, degassing (\dataneeded{vacuum, duration}), mould filling,
+pre-alignment, curing (\dataneeded{temperature, time}) and demoulding.
+
+\subsection*{Magnetic pre-alignment and final magnetization}
+Pre-alignment field \dataneeded{field strength, direction} applied during
+curing; final magnetization by \dataneeded{impulse magnetizer field, direction}.
+
+\subsection*{Geometry measurement}
+Height, diameter and pitch measured on \dataneeded{$n\geq 30$ cilia, $\geq 3$
+patches} by \dataneeded{microscope/method}; report mean\,$\pm$\,s.d.
+
+\subsection*{Mechanical testing}
+Stress--strain, modulus and hysteresis on \dataneeded{tester model} at
+\dataneeded{strain rate}, $n=$~\dataneeded{5 specimens (>=)} per group
+(non-magnetic, $x$/$y$/$z$-magnetized).
+
+\subsection*{Magnetic characterization}
+No-load field, sensitivity and LOD per geometry; report $\sigma_B$ and
+$S=\mathrm{d}|\Delta\mathbf{B}|/\mathrm{d}F$.
+
+\subsection*{Local 2$\times$2 PCB architecture}
+Four MLX90393 at sensor pitch \dataneeded{pitch}; patch size
+\dataneeded{dimensions}; \dataneeded{PCB stack/material}.
+
+\subsection*{44-node hand FPCB architecture}
+Node layout (fingertip/finger pad/palm/thumb) with per-node $x,y$, orientation,
+MLX variant, MUX channel and status (Extended Data table); FPCB
+\dataneeded{material, layer count}.
+
+\subsection*{MLX90393 configuration}
+Gain, resolution, oversampling (OSR), digital filter and conversion settings
+\dataneeded{register settings}; sampling rate \dataneeded{per-node ODR for
+the array config; single-sensor fastmode logging measured at 1000~Hz
+(2025-07-17 dataset), confirm for final system}.
+
+\subsection*{MUX/I2C acquisition}
+\dataneeded{MUX part, I2C bus speed, MCU model}; measured full 44-node frame
+rate \dataneeded{Hz} (not chip nominal); firmware \dataneeded{version}.
+
+\subsection*{xArm--Nano17 loading protocol}
+UFactory~xArm (\dataneeded{model}) with ATI~Nano17 (\dataneeded{calibration,
+resolution}); non-magnetic probe (\dataneeded{PEEK/nylon/acrylic/ceramic},
+tip geometry); approach/hold/retract profile \dataneeded{speeds, dwell}.
+
+\subsection*{Time synchronization}
+MLX90393, Nano17, xArm and video synchronized via \dataneeded{trigger/method};
+residual sync error \dataneeded{ms}.
+
+\subsection*{Baseline correction}
+Per-trial baseline from \dataneeded{pre-contact window, s}; drift handling
+\dataneeded{method}.
+
+\subsection*{Temperature compensation}
+MLX90393 temperature channel used to \dataneeded{compensation model}.
+
+\subsection*{Signal filtering}
+\dataneeded{filter type, cutoff frequencies} for contact, airflow and pulse
+bands separately; software \dataneeded{SciPy/version}.
+
+\subsection*{Inverse model}
+Feature vector (12 channels for $2\times2$), model architectures
+(nearest-neighbour, ridge/polynomial, random forest, MLP), hyperparameters
+\dataneeded{settings}, training library \dataneeded{scikit-learn/PyTorch version}.
+
+\subsection*{Train/validation/test split}
+Split by position (60/20/20), no frame-level leakage across loading windows;
+cross-session protocol \dataneeded{sessions}.
+
+\subsection*{Statistical analysis}
+$n$ = independent devices/subjects (not frames); report individual points with
+mean\,$\pm$\,s.d.\ or 95\% CI; two-sided tests \dataneeded{test names}, exact
+$P$ values, effect sizes, and \dataneeded{multiple-comparison correction}.
+
+\subsection*{Wind-tunnel setup}
+\dataneeded{tunnel/fan model}, reference anemometer \dataneeded{model,
+accuracy}, speeds \dataneeded{levels}, randomized order, \dataneeded{runs}.
+
+\subsection*{Pulse experiment and ethics}
+Approved by \dataneeded{IRB/committee, protocol number}; informed consent
+obtained. Subjects $n=$~\dataneeded{10--20}; synchronized ECG
+(\dataneeded{device}) and preferably PPG; patch location, attachment pressure,
+wrist side and posture recorded.
+
+\subsection*{Data and code availability}
+Data at \dataneeded{repository/DOI}; analysis code at
+\dataneeded{repository URL} (see the CSV logs and analysis scripts in this
+project as the working basis).
