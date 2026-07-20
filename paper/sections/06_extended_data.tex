@@ -177,6 +177,37 @@ direction. \textbf{(e)}~Geometry--sensitivity heatmaps. \textbf{(f)}~Dynamic
 response, repeatability and 150k-cycle durability (sub-panels f1--f5).}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{fig3_quad_fingerprints.pdf}
+\caption*{\textbf{Preliminary Fig.~3 material $\vert$ Quad-sensor direction
+fingerprints (real data, machine-driven protocol, 2026-07-17).}
+\textbf{(a)}~Stage-mean field change per channel (4 sensors $\times$ 3 axes)
+for five loading conditions ($x$-shear left/right, $y$-shear left/right,
+$z$-press; values in nominal logger $\mu$T). Each condition leaves a distinct
+spatially differential signature. \textbf{(b)}~Per-cycle 12-channel samples
+in the LDA plane (projection for visualization; the quoted accuracy comes
+solely from leave-one-trial-out validation): three classes fully separated,
+100.0\% (1120/1120 cycles, 56 trials; shuffled-label control at chance).
+Feature construction uses protocol stage labels (class separability, not
+blind real-time decoding).}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{fig3_quad_decoding.pdf}
+\caption*{\textbf{Preliminary Fig.~3 material $\vert$ Decoding performance
+and single-sensor control.} \textbf{(a)}~Leave-one-trial-out confusion
+matrix. \textbf{(b,c)}~Per-cycle shear-force amplitude versus the strongest
+magnetic channel (truncated $y$-axes; $r$/$p$/$n$ printed): under
+displacement-controlled actuation, field amplitude does not track the small
+residual force variation --- force decoding requires the force-controlled
+xArm protocol. \textbf{(d)}~$z$-press sensitivity: isolated single sensor
+(ctrl) versus the four array sensors; the spread reflects patch--sensor
+offset geometry (assumes equal logger gain across the two acquisition
+setups).}
+\end{figure}
+
 \paragraph{Supplementary Videos.}
 (1) $2\times2$ inverse decoding; (2) bubble touch; (3) 44-node real-time map;
 (4) no-contact artifact test; (5) wind-tunnel pose change;

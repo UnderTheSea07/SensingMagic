@@ -25,7 +25,9 @@ ultrahigh, unprecedented, breakthrough, ultra-sensitive, world-first.
 ## Existing-data status (2026-07-18 review of repo CSVs)
 All 1880 CSVs are **single-MLX90393** (`ms,X,Y,Z`). No 2×2 / 1×4 / 44-node
 array data, no Nano17 force column, no ECG/PPG. Consequence:
-- **Fig. 1, 3, 4 (array, force decoding, full-hand): zero backing data.** All
+- **Fig. 3 UPDATE 2026-07-20: first 2x2 quad-sensor dataset processed** — direction
+  class separability 100% LOTO (see quad_dataset_verdict.md); position decoding
+  still untested. Fig. 1, 4 (full-hand): zero backing data. All
   those Results/claims are structural placeholders only.
 - **Fig. 2 (cilia): SUBSTANTIALLY BACKED as of 2026-07-18** by the
   reliability-project dataset (see `reliability_dataset_mapping.md`):

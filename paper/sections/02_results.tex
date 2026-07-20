@@ -94,11 +94,30 @@ or ``magnetic cilia tactile skin'' (see notes/claims\_table.md).
 % ----------------------------------------------------------------------
 \subsection*{Local tri-axis sensing and unseen-position inverse decoding}
 % -> Fig. 3a–e
-To test whether sparse tri-axis sampling suffices to invert contact, we
-calibrated a local $2\times2$ unit of four MLX90393 sensors (12 channels: 4
-sensors $\times$ $B_x,B_y,B_z$) at a sensor pitch of
-\dataneeded{sensor pitch, mm} (Fig.~3a) on a UFactory~xArm equipped with an
-ATI~Nano17 force/torque sensor and a non-magnetic probe (Fig.~3b). Tri-axis
+A first machine-driven campaign on the assembled $2\times2$ unit establishes
+that the 12-channel readout separates loading directions. Under a fixed
+protocol (1~mm press followed by $\pm$2~mm shear, or a 2~mm press; $\sim$20
+cycles per trial; 56 usable trials), the four sensors produce a reproducible,
+spatially differential fingerprint per condition: under $x$-shear, sensor~0's
+$B_x$ stays near null (0.11 of the largest $|\Delta B_x|$) while sensors
+2 and 3 respond with same-signed and opposite-signed in-plane components,
+respectively, and the pattern rotates as expected under $y$-shear. Using
+per-cycle 12-channel features, a linear classifier separates $x$-shear,
+$y$-shear and $z$-press with 100\% leave-one-trial-out accuracy (1120/1120
+cycles; shuffled-label control at chance). Because actuation was
+displacement-controlled, per-cycle force amplitude varies little and is not
+decodable from these data ($|r|\leq0.23$); force decoding therefore awaits
+the force-controlled protocol below. A single-sensor control shows the
+best-placed array sensor reaches 84\% of the isolated-sensor $z$-press
+sensitivity (230 vs.\ 275~$\mu$T\,N$^{-1}$, nominal logger units), with the
+spread across the four sensors (121--230~$\mu$T\,N$^{-1}$) reflecting the
+patch--sensor offsets rather than magnetic cancellation, which affects only
+the in-plane components.
+
+To decode contact quantitatively, we next calibrate the local unit
+(sensor pitch \dataneeded{sensor pitch, mm}; Fig.~3a) on a UFactory~xArm
+equipped with an ATI~Nano17 force/torque sensor and a non-magnetic probe
+(Fig.~3b). Tri-axis
 fingerprints recorded over normal forces
 $F_n=\dataneeded{levels, e.g.\ 10/20/50/100~mN}$, shear forces
 $F_s=\dataneeded{levels}$ and directions
