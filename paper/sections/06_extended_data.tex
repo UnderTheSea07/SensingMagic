@@ -179,33 +179,31 @@ response, repeatability and 150k-cycle durability (sub-panels f1--f5).}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.95\textwidth]{fig3_quad_fingerprints.pdf}
-\caption*{\textbf{Preliminary Fig.~3 material $\vert$ Quad-sensor direction
-fingerprints (real data, machine-driven protocol, 2026-07-17).}
-\textbf{(a)}~Stage-mean field change per channel (4 sensors $\times$ 3 axes)
-for five loading conditions ($x$-shear left/right, $y$-shear left/right,
-$z$-press; values in nominal logger $\mu$T). Each condition leaves a distinct
-spatially differential signature. \textbf{(b)}~Per-cycle 12-channel samples
-in the LDA plane (projection for visualization; the quoted accuracy comes
-solely from leave-one-trial-out validation): three classes fully separated,
-100.0\% (1120/1120 cycles, 56 trials; shuffled-label control at chance).
-Feature construction uses protocol stage labels (class separability, not
-blind real-time decoding).}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.95\textwidth]{fig3_quad_decoding.pdf}
-\caption*{\textbf{Preliminary Fig.~3 material $\vert$ Decoding performance
-and single-sensor control.} \textbf{(a)}~Leave-one-trial-out confusion
-matrix. \textbf{(b,c)}~Per-cycle shear-force amplitude versus the strongest
-magnetic channel (truncated $y$-axes; $r$/$p$/$n$ printed): under
-displacement-controlled actuation, field amplitude does not track the small
-residual force variation --- force decoding requires the force-controlled
-xArm protocol. \textbf{(d)}~$z$-press sensitivity: isolated single sensor
-(ctrl) versus the four array sensors; the spread reflects patch--sensor
-offset geometry (assumes equal logger gain across the two acquisition
-setups).}
+\includegraphics[width=\textwidth]{fig3_quad_main.pdf}
+\caption*{\textbf{Fig.~3 candidate (main-figure draft) $\vert$ The local
+$2\times2$ tri-axis unit separates loading directions.}
+\textbf{(a)}~Schematic: sensor layout (top view; cilia patch footprint
+inferred from no-load baselines) and machine-driven protocols (shear trials:
+1~mm press then $\pm$2~mm shear $\times\sim$20; $z$ trials: 2~mm press
+$\times$20; usable trials $x$ 17 of 20, $y$ 19 of 21, $z$ 20 of 20 after
+alignment quality control). \textbf{(b)}~Representative $x$-shear trial:
+baseline-subtracted 12-channel response (four sensors $\times$
+$B_x,B_y,B_z$), left/right shear stages shaded; the four sensors respond
+with distinct, spatially differential signatures. \textbf{(c)}~Fingerprint
+matrix: trial-averaged stage response per channel for the five loading
+conditions (nominal logger $\mu$T). \textbf{(d)}~Per-cycle 12-channel
+samples in the LDA plane (visualization projection) and leave-one-trial-out
+confusion matrix: 100.0\% (1120/1120 cycles, 56 trials; shuffled-label
+control at chance). Two caveats: features are built from protocol stage
+labels (shear cycles as right$-$left differentials, $z$ as press-plateau
+means), so this is class separability rather than blind real-time decoding;
+and each class was acquired as a contiguous same-day block, so
+trial-held-out validation cannot fully exclude block-level drift as a cue.
+\textbf{(e)}~$z$-press sensitivity of an isolated single sensor (ctrl)
+versus the four array nodes; the spread reflects patch--sensor offset
+geometry (equal logger gain assumed). Force amplitude is not decodable under
+this displacement-controlled protocol ($|r|\leq0.23$; see analysis notes)
+--- force decoding awaits the force-controlled xArm campaign.}
 \end{figure}
 
 \paragraph{Supplementary Videos.}
