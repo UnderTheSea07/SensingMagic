@@ -206,6 +206,23 @@ this displacement-controlled protocol ($|r|\leq0.23$; see analysis notes)
 --- force decoding awaits the force-controlled xArm campaign.}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig3_quad_regression.pdf}
+\caption*{\textbf{Fig.~3 candidate $\vert$ Continuous shear-displacement
+decoding from the $2\times2$ unit.} Leave-one-trial-out regression of the
+commanded platen displacement from 50-Hz 12-channel frames.
+\textbf{(a,b)}~Held-out trials (median-RMSE representatives): predicted
+trajectory versus commanded triangle profile along $x$ and $y$.
+\textbf{(c)}~All held-out frames (17 $x$- + 18 $y$-trials): RMSE 0.21/0.07~mm
+(random forest; ridge 0.19/0.11~mm), $R^2$ 0.966/0.996; mean-prediction
+baseline 1.16~mm. \textbf{(d)}~Residual distributions. Truth is the
+commanded trajectory (no encoder readback; constant speed between
+magnetically anchored extremes); this is flat-platen shear-displacement
+decoding, not point-contact localization. The audit re-implemented the
+validation loop from scratch and reproduced the frame table bit-for-bit.}
+\end{figure}
+
 \paragraph{Supplementary Videos.}
 (1) $2\times2$ inverse decoding; (2) bubble touch; (3) 44-node real-time map;
 (4) no-contact artifact test; (5) wind-tunnel pose change;

@@ -104,10 +104,15 @@ $B_x$ stays near null (0.11 of the largest $|\Delta B_x|$) while sensors
 respectively, and the pattern rotates as expected under $y$-shear. Using
 per-cycle 12-channel features, a linear classifier separates $x$-shear,
 $y$-shear and $z$-press with 100\% leave-one-trial-out accuracy (1120/1120
-cycles; shuffled-label control at chance). Because actuation was
-displacement-controlled, per-cycle force amplitude varies little and is not
-decodable from these data ($|r|\leq0.23$); force decoding therefore awaits
-the force-controlled protocol below. A single-sensor control shows the
+cycles; shuffled-label control at chance). Beyond classification, the same 12 channels decode the lateral shear
+displacement continuously: regressing the commanded platen trajectory from
+50-Hz frames yields a leave-one-trial-out RMSE of 0.19~mm along $x$ and
+0.07~mm along $y$ over the $\pm$2~mm range ($R^2=0.97$ and $0.996$;
+mean-prediction baseline 1.16~mm) --- sub-0.2-mm shear-displacement readout
+from four sensors. Because actuation was displacement-controlled, per-cycle
+force amplitude varies little and is not decodable from these data
+($|r|\leq0.23$); force decoding therefore awaits the force-controlled
+protocol below. A single-sensor control shows the
 best-placed array sensor reaches 84\% of the isolated-sensor $z$-press
 sensitivity (230 vs.\ 275~$\mu$T\,N$^{-1}$, nominal logger units), with the
 spread across the four sensors (121--230~$\mu$T\,N$^{-1}$) reflecting the
