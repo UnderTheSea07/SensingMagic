@@ -1,0 +1,62 @@
+% ======================================================================
+% INTRODUCTION (4–5 paragraphs)
+% P1 field need -> P2 limits of existing methods -> P3 why cilia ->
+% P4 contributions -> P5 significance.
+% Citations are placeholders (\refneeded) — do NOT invent references.
+% ======================================================================
+\section*{Introduction}
+
+Embodied intelligence, whether in robotic manipulators or on-body wearable
+interfaces, depends on tactile sensing that is at once large-area, mechanically
+compliant, multi-axis, dynamic and sensitive to weak forces
+\cite{dahiya2010tactile,chortos2016pursuing}. Dexterous manipulation and safe
+human contact demand resolving not only firm grasping loads but also light
+touch, shear, incipient slip, faint airflow and physiological micro-vibrations
+such as the pulse \cite{sundaram2019learning}. Yet most tactile platforms are
+optimized for a narrow slice of this space, and no single skin resolves subtle,
+spatially distributed and rapidly varying stimuli across an entire hand.
+
+No single transduction principle spans this requirement space. Capacitive and
+piezoresistive skins scale to large areas but contend with dense interconnects,
+cross-talk, baseline drift and poor weak-force resolution
+\cite{sundaram2019learning,boutry2018hierarchically}. Piezoelectric and
+triboelectric devices capture dynamic transients but fade under sustained static
+load \refneeded{piezoelectric tactile}. Vision-based tactile sensors deliver
+fine spatial resolution but demand an internal camera, illumination and
+per-contact computation, constraining thickness, curvature and integration
+density \cite{yuan2017gelsight}. Conventional magnetic skins offer contactless,
+drift-tolerant, multi-axis readout, yet their planar magnet-film geometries
+often limit weak-stimulus sensitivity, directional decoupling or scalable
+coverage \cite{hellebrekers2019soft,yan2021soft}.
+
+Biology resolves weak mechanical signals with slender, high-aspect-ratio
+appendages---mammalian whiskers, insect sensilla and hair cells---that convert
+faint airflow, contact and vibration into amplified deflection
+\cite{park2023bioinspired}. Magnetic cilia borrow this geometry but have so far
+been demonstrated only as single elements or small arrays
+\cite{alfadhel2015magnetic,man2023tactile}. We translate the principle into an
+ordered, full-hand array of magnetized elastomer cilia. Their high aspect ratio
+yields compliance to weak shear, flow and vibration; because each cilium is
+transduced magnetically by an underlying tri-axis sensor, the array needs no
+individual wiring and forms a passive mechanical amplification layer compatible
+with sparse, distributed magnetic sampling.
+
+Here we report a magnetic cilia tactile skin and test it against five questions.
+Why cilia, not a flat magnetic film? Can a local $2\times2$ tri-axis unit invert
+contact position, force and direction at unseen positions? Does that capability
+scale to a 44-node full-hand array? Do the resulting whole-hand maps track true
+contact rather than posture, geomagnetic or cable-motion artifacts? And can the
+platform capture weak dynamic disturbances---airflow and pulse---that rigid force
+sensors miss? Our contributions are (i) a geometry-optimized magnetic cilia
+transduction layer with a quantified enhancement over matched flat controls,
+(ii) local $2\times2$ inverse decoding validated at unseen positions,
+(iii) a 44-node full-hand array with explicit motion-artifact suppression and
+trustworthy spatial mapping, and (iv) shared sensing of weak external airflow
+and internal pulse micro-vibrations on one platform.
+
+Together, these results establish magnetic cilia as a scalable mechanical
+transduction layer for embodied perception---one compliant skin that resolves a
+robot's grasp, the airflow around it and the pulse beneath it---pointing toward
+integrated robotic touch, wearable interfaces and unobtrusive monitoring of
+subtle environmental and physiological signals \refneeded{embodied sensing
+outlook}.

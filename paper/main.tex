@@ -1,0 +1,63 @@
+% ======================================================================
+% Magnetic cilia tactile skin — Nature Sensors target manuscript
+% Master file. Compile: pdflatex -> bibtex -> pdflatex x2
+% All missing numbers are marked [DATA NEEDED: ...]. No data are invented.
+% ======================================================================
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lineno}
+\usepackage[numbers,super,sort&compress]{natbib}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% ---- placeholder command: every missing number MUST use this ----------
+\newcommand{\dataneeded}[1]{\textcolor{red}{[DATA NEEDED: #1]}}
+% ---- reference placeholder: never fabricate citations -----------------
+\newcommand{\refneeded}[1]{\textcolor{orange}{[REF NEEDED: #1]}}
+
+\captionsetup{font=small,labelfont=bf}
+\graphicspath{{figures/}}
+
+\title{\textbf{A full-hand magnetic cilia tactile skin for spatially
+distributed perception of subtle mechanical stimuli}\\[6pt]
+\normalsize\textit{Aspirational title (claim-gated, see notes/claims\_table.md):
+``Cilia-amplified magnetic tactile skin for embodied spatial perception of
+subtle mechanical stimuli'' --- usable only after the flat-film control and
+gain statistics in Fig.~2e pass the claim gate.}}
+
+\author{Author list \dataneeded{authors} \\[2pt]
+\normalsize \dataneeded{affiliations}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\linenumbers
+\onehalfspacing
+
+% ----------------------------------------------------------------------
+\input{sections/00_abstract}
+\input{sections/01_introduction}
+\input{sections/02_results}
+\input{sections/03_discussion}
+\input{sections/04_methods}
+
+% ----------------------------------------------------------------------
+\clearpage
+\bibliographystyle{unsrt} % switch to naturemag.bst at submission
+\bibliography{references}
+
+% ----------------------------------------------------------------------
+\clearpage
+\input{sections/05_figure_captions}
+\clearpage
+\input{sections/06_extended_data}
+
+\end{document}

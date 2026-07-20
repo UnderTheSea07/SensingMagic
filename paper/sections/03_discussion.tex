@@ -1,0 +1,39 @@
+% ======================================================================
+% DISCUSSION — concise, quantitative, no marketing superlatives.
+% ======================================================================
+\section*{Discussion}
+
+We have shown that an ordered magnetic cilia layer read out by distributed
+tri-axis sensors provides a route to embodied perception of subtle
+mechanical stimuli. Relative to conventional planar magnetic skins, the
+cilia geometry enhances the weak-stimulus response by
+\dataneeded{$G_{\mathrm{cilia}}$}-fold while retaining the contactless,
+drift-tolerant, multi-axis character of magnetic transduction. The local
+$2\times2$ unit generalizes to unseen contact positions, and the same
+decoding scales to a 44-node hand with explicit artifact
+suppression---addressing the central risk that whole-hand maps reflect
+posture or field artifacts rather than true contact.
+
+Several limitations bound these claims. First, ground-truth forces are
+established with an ATI~Nano17, whose resolution does not certify sub-mN or
+$\mu$N-level truth; the bubble-touch result is therefore an
+ultralight-contact demonstration, not a detection limit. Second, the
+airflow maps report airflow-induced tactile responses, not a resolved flow
+field, which would require PIV or multi-point anemometry. Third, pulse
+waveforms are validated against ECG in timing only; morphological features
+such as the dicrotic notch require a pressure or PPG reference for
+confirmation. Finally, in the absence of feedback experiments we claim
+grasp-state discrimination and distributed contact readout, not closed-loop
+control.
+
+The comparison with vision-based tactile sensing clarifies where the
+platform sits. Vision-based sensors reach sub-millimeter local resolution
+but require an internal camera, illumination and per-contact computation,
+which constrain thickness, curvature and integration density. The magnetic
+cilia tactile skin makes the opposite trade: it accepts coarser local
+resolution in exchange for a camera-free, low-profile, three-axis form
+factor that covers a full hand and remains sensitive to weak dynamic
+disturbances such as airflow and pulse micro-vibrations. Future work
+includes per-node force calibration across the whole hand, larger-cohort
+pulse studies with a PPG reference, and integration of the tactile maps
+into manipulation feedback loops.

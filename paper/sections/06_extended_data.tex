@@ -1,0 +1,229 @@
+% ======================================================================
+% EXTENDED DATA / SUPPLEMENTARY — captions and inventory only.
+% ======================================================================
+\section*{Extended Data and Supplementary Information}
+
+\paragraph{Extended Data Fig. 1 $\vert$ Full geometry and control matrix.}
+All six cilia geometries against flat film, short pillars, non-magnetic cilia
+and bare sensor; per-condition sensitivity, hysteresis and response time.
+\dataneeded{full matrix values}
+
+\paragraph{Extended Data Fig. 2 $\vert$ Decoding validation.}
+Train/validation/test split by position, cross-session results and model
+comparison. \dataneeded{tables/curves}
+
+\paragraph{Extended Data Fig. 3 $\vert$ Artifact suppression.}
+No-contact motion artifacts, reference-sensor compensation and before/after CMR.
+\dataneeded{values}
+
+\paragraph{Extended Data Fig. 4 $\vert$ 44-node characterization.}
+Per-node baseline, gain, noise, orientation and dead channels.
+\dataneeded{node table}
+
+\paragraph{Extended Data Fig. 5 $\vert$ 1$\times$4 strip.}
+1D localization, sliding and slip detection. \dataneeded{values}
+
+\paragraph{Extended Data Fig. 6 $\vert$ Full airflow results.}
+All wind-tunnel speeds, poses and dynamic profiles. \dataneeded{values}
+
+\paragraph{Extended Data Fig. 7 $\vert$ Full pulse results.}
+All subjects, sessions and positions with ECG (and PPG) references.
+\dataneeded{values}
+
+\section*{Preliminary single-sensor data (internal; to be superseded)}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig5d_pulse_demo.pdf}
+\caption*{\textbf{Preliminary Fig.~5d candidate $\vert$ Pulse micro-vibration
+demonstration (real data, single MLX90393, L8/d0.8 cilia, 500~Hz).}
+Left: raw and band-passed (0.5--10~Hz) $B_z$ at the radial artery.
+Middle: beat detection on the band-passed trace. Right: beat-aligned
+individual beats (grey) and their mean ($n=95$ beats, peak
+$\approx$3.6~$\mu$T), showing a coherent systolic waveform with a secondary
+shoulder. Qualitative demonstration only: no synchronized ECG exists for this
+recording, so no heart-rate accuracy or timing claim is made
+(notes/pulse\_data\_verdict.md).}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{edx_wind_preliminary.pdf}
+\caption*{\textbf{Preliminary airflow data $\vert$ Why the 2025-07-17 session
+cannot yield a $\Delta B$--$v$ calibration.} \textbf{(a)}~Band-limited RMS is
+non-monotonic in speed. \textbf{(b)}~The response concentrates in narrowband
+peaks at fan-rotation harmonics, indistinguishable from fan-motor magnetic
+pickup without a bare-sensor control; the broadband floor is
+speed-independent. \textbf{(c)}~The steady DC shift follows trial order
+(drift and a setup discontinuity at trial~9), not wind speed. Re-measurement
+SOP: notes/acquisition\_SOPs.md, SOP-4.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{fig2e_geometry_sensitivity.pdf}
+\caption*{\textbf{Preliminary Fig.~2e candidate $\vert$ Geometry-dependent
+sensitivity (real data, nine $(L,d)$ combinations, manual loading at
+1/2/3~mm depths, ATI force reference).} Median plateau sensitivity
+$S=|\Delta B|/F$ per geometry under tangential (left) and normal (right)
+loading; per-cell values in mT\,N$^{-1}$. The $(8.0,0.8)$ tangential cell and
+one $(8,1.0)$-adjacent artifact point are excluded per QC. The largest median
+response occurs for the longest, thickest cilia ($L=8$~mm, $d=1.0$~mm).
+Manual-loading depth variability (CV 13.4\%) limits absolute calibration; the
+robot-controlled campaign (SOP-1) supersedes these values for force claims.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{fig2f_dynamics_durability.pdf}
+\caption*{\textbf{Preliminary Fig.~2f candidate $\vert$ Durability and
+dynamic response (real data).} \textbf{(a)}~Checkpoint sensitivity
+$\Delta B_z/\Delta F_z$ over 150{,}000 compression cycles for three
+independent samples; open symbols mark checkpoints with $>$9\% corrupted
+acquisition packets (low confidence). Reliable checkpoints show no
+significant degradation (within $\pm$4\% from 50k to 150k cycles).
+\textbf{(b)}~Distribution of 10--90\% response times across 81 tap events
+(fastest 25~ms, median 50~ms).}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{fig3c_event_alignment.pdf}
+\caption*{\textbf{Preliminary Fig.~3 material $\vert$ Force--magnetic
+correspondence (real data, manual loading, ATI reference).}
+\textbf{(a)}~Single load--hold--unload event: compressive force $-F_z$ and
+magnetic response $-\Delta B_z$ (sign conventions on axes), peak 370~mN
+$\leftrightarrow$ 1009~$\mu$T, Pearson $r=0.95$. \textbf{(b)}~Five
+consecutive cycles, $r=0.82$; amplitude variation reflects manual depth
+variability.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{fig3c_BF_calibration.pdf}
+\caption*{\textbf{Preliminary Fig.~3 material $\vert$ $\Delta B$--$F$
+relation (real data, manual loading).} \textbf{(a)}~Loading-branch
+trajectory of a single press (force relaxation gives the non-monotonic
+path). \textbf{(b)}~Plateau amplitudes across 120 manual trials (3 samples
+$\times$ 2 target depths): pooled linear fit $k=2.0\times10^3$~$\mu$T/N,
+$R^2=0.37$ --- the modest $R^2$ reflects manual depth variability and is
+expected to improve substantially under the robot-controlled protocol
+(SOP-1).}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{fig2f_response_event.pdf}
+\caption*{\textbf{Preliminary Fig.~2f material $\vert$ Dynamic response and
+repeatability (real data).} \textbf{(a)}~Representative median-amplitude tap
+event (high-rate acquisition): 10--90\% rise 72~ms, 90--10\% recovery 35~ms
+(7-ms moving average; values are smoothing-dependent within $\sim$30--80~ms;
+the fastest of 81 events is 25~ms). \textbf{(b)}~Five aligned manual cycles
+and mean. \textbf{(c)}~Peak amplitudes across 20 manual trials, CV~13.4\%.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{fig2f_cyclic_stability.pdf}
+\caption*{\textbf{Preliminary Fig.~2f material $\vert$ Within-checkpoint
+cyclic stability of a $5\times5$ cilia array (real data).}
+\textbf{(a)}~Baseline-subtracted $B_x$ during machine-cycled loading
+(period 0.512~s, 1.95~Hz; 20-s excerpt) at the 10{,}000-cycle checkpoint.
+\textbf{(b)}~Per-cycle peak-to-peak amplitude across all 9{,}999 recorded
+cycles: median 53.3~$\mu$T, drift between first and last 10\% of cycles
+$-2.5$\%.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.62\textwidth]{fig2d_stress_strain_direction.pdf}
+\caption*{\textbf{Fig.~2d candidate $\vert$ Stress--strain by magnetization
+direction (real data, DIN~EN~ISO~527-1).} Engineering stress (load divided by
+each specimen's cross-section $A_0$) versus strain, shown to 100\% strain.
+Thin lines: individual specimens; bold lines: group means (averaged only
+where all group specimens have data). $E_t$ = linear-fit slope over the
+20--40\% strain interval (dimensionless strain), mean\,$\pm$\,s.d.\ from the
+machine summary: non-mag.\ $0.72\pm0.11$, $x$ $0.84\pm0.09$, $y$
+$0.73\pm0.11$, $z$ $0.68\pm0.11$~MPa. The $x$-magnetized group (aligned with
+the tensile axis) shows a trend towards higher stiffness (2 valid
+specimens---trend only, no significance claim).}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.62\textwidth]{fig2d_stress_strain_wtpct.pdf}
+\caption*{\textbf{Fig.~2a/2d candidate $\vert$ Composition series:
+Ecoflex~00-30 with 50--80~wt\% NdFeB (real data).} Full curves to specimen
+break. 50--70~wt\% remain compliant ($E_t$ $0.130$--$0.152$~MPa) with
+elongation above 400\%; 80~wt\% stiffens roughly sixfold
+($0.836\pm0.095$~MPa) with elongation reduced to $\approx$150\%,
+defining the compliance--magnetic-loading trade-off for cilia design. Note:
+the tester export's per-specimen channel is already stress (kPa), verified
+against the summary sheet.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{fig2_composite.png}
+\caption*{\textbf{Figure 2 assembly draft (raster; vector originals ship
+separately).} \textbf{(a)}~Composition series (Ecoflex~00-30, 50--80~wt\%
+NdFeB). \textbf{(b)}~Fabrication workflow (team schematic; fix ``Vaccum''
+$\rightarrow$ Vacuum and ``Demode'' $\rightarrow$ Demould in the vector
+redraw). \textbf{(c)}~SEM micrographs with on-image scale bars: c1 array
+overview (400~$\mu$m), c2 cilia close-up (300~$\mu$m), c3 single-cilium
+cross-section (100~$\mu$m bar; measured width 402.5~$\mu$m for nominal
+$d=0.5$~mm). \textbf{(d)}~Stress--strain by magnetization
+direction. \textbf{(e)}~Geometry--sensitivity heatmaps. \textbf{(f)}~Dynamic
+response, repeatability and 150k-cycle durability (sub-panels f1--f5).}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig3_quad_main.pdf}
+\caption*{\textbf{Fig.~3 candidate (main-figure draft) $\vert$ The local
+$2\times2$ tri-axis unit separates loading directions.}
+\textbf{(a)}~Schematic: sensor layout (top view; cilia patch footprint
+inferred from no-load baselines) and machine-driven protocols (shear trials:
+1~mm press then $\pm$2~mm shear $\times\sim$20; $z$ trials: 2~mm press
+$\times$20; usable trials $x$ 17 of 20, $y$ 19 of 21, $z$ 20 of 20 after
+alignment quality control). \textbf{(b)}~Representative $x$-shear trial:
+baseline-subtracted 12-channel response (four sensors $\times$
+$B_x,B_y,B_z$), left/right shear stages shaded; the four sensors respond
+with distinct, spatially differential signatures. \textbf{(c)}~Fingerprint
+matrix: trial-averaged stage response per channel for the five loading
+conditions (nominal logger $\mu$T). \textbf{(d)}~Per-cycle 12-channel
+samples in the LDA plane (visualization projection) and leave-one-trial-out
+confusion matrix: 100.0\% (1120/1120 cycles, 56 trials; shuffled-label
+control at chance). Two caveats: features are built from protocol stage
+labels (shear cycles as right$-$left differentials, $z$ as press-plateau
+means), so this is class separability rather than blind real-time decoding;
+and each class was acquired as a contiguous same-day block, so
+trial-held-out validation cannot fully exclude block-level drift as a cue.
+\textbf{(e)}~$z$-press sensitivity of an isolated single sensor (ctrl)
+versus the four array nodes; the spread reflects patch--sensor offset
+geometry (equal logger gain assumed). Force amplitude is not decodable under
+this displacement-controlled protocol ($|r|\leq0.23$; see analysis notes)
+--- force decoding awaits the force-controlled xArm campaign.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig3_quad_regression.pdf}
+\caption*{\textbf{Fig.~3 candidate $\vert$ Continuous shear-displacement
+decoding from the $2\times2$ unit.} Leave-one-trial-out regression of the
+commanded platen displacement from 50-Hz 12-channel frames.
+\textbf{(a,b)}~Held-out trials (median-RMSE representatives): predicted
+trajectory versus commanded triangle profile along $x$ and $y$.
+\textbf{(c)}~All held-out frames (17 $x$- + 18 $y$-trials): RMSE 0.21/0.07~mm
+(random forest; ridge 0.19/0.11~mm), $R^2$ 0.966/0.996; mean-prediction
+baseline 1.16~mm. \textbf{(d)}~Residual distributions. Truth is the
+commanded trajectory (no encoder readback; constant speed between
+magnetically anchored extremes); this is flat-platen shear-displacement
+decoding, not point-contact localization. The audit re-implemented the
+validation loop from scratch and reproduced the frame table bit-for-bit.}
+\end{figure}
+
+\paragraph{Supplementary Videos.}
+(1) $2\times2$ inverse decoding; (2) bubble touch; (3) 44-node real-time map;
+(4) no-contact artifact test; (5) wind-tunnel pose change;
+(6) ECG-synchronized pulse.

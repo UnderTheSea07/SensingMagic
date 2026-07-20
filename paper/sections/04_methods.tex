@@ -1,0 +1,254 @@
+% ======================================================================
+% METHODS — 21 subsections, each to be written to reproducibility.
+% All device models, rates, cutoffs, versions, repeats -> \dataneeded.
+% ======================================================================
+\section*{Methods}
+
+\subsection*{Materials and magnetic particle preparation}
+NdFeB powder (2000 mesh; nominal particle size $\approx$6.5~$\mu$m;
+\dataneeded{grade, supplier}) was combined with two elastomer matrices.
+Ecoflex~00-30 was used for the tactile-skin cilia patches: compositions of
+50--80~wt\% NdFeB were screened mechanically, and devices use 60~wt\%
+(\dataneeded{confirm 60 vs 70 wt\% against the fabrication log}). PDMS
+(base:curing agent 10:1 by mass) was used for the geometry/reliability sample
+series (\dataneeded{confirm matrix assignment per sample batch}). The
+effective magnetization of the cured composite, calibrated by matching
+finite-element tip-deflection case studies (deviation $<$0.1\%), is
+$M\approx82$~kA\,m$^{-1}$.
+
+\subsection*{Cilia mold design and fabrication}
+Molds (\dataneeded{material, machining/printing method, resolution}) defined
+cilia with length $L=3,5,8$~mm and diameter $d=0.5,0.8,1.0$~mm; array samples
+used pitches of 0.5 or 1.0~mm (geometry-matrix sample pitch:
+\dataneeded{pitch $s$}). Fabrication followed the established workflow:
+mixing, vacuum degassing (15~min), pre-cure (5~min at
+\dataneeded{temperature}), mold filling and casting, magnetic pre-alignment
+under a uniform field, full cure (60~min at \dataneeded{temperature}) and
+demolding.
+
+\subsection*{Magnetic pre-alignment and final magnetization}
+The NdFeB-loaded elastomer was pre-aligned in a uniform magnetic field
+(\dataneeded{field strength, direction}) applied between casting and full
+cure. After demolding, samples were magnetized to saturation in a strong
+field (\dataneeded{magnetizer type, field strength, direction}).
+
+\subsection*{Geometry measurement}
+Cilium height, diameter and pitch were measured on \dataneeded{$n\geq 30$
+cilia, $\geq 3$ patches} by scanning electron microscopy (SEM) and
+\dataneeded{optical microscope/method}, and are reported as mean\,$\pm$\,s.d.
+SEM cross-sections show that the as-fabricated diameter is smaller than
+nominal: 402.5~$\mu$m was measured for nominal $d=0.5$~mm, corresponding to
+$\approx$19\% shrinkage (\dataneeded{shrinkage statistics across geometries
+from the SEM series}).
+
+\subsection*{Mechanical testing}
+Dogbone specimens were tested in uniaxial tension according to
+DIN~EN~ISO~527-1 on a ZwickRoell testing machine (\dataneeded{model, strain
+rate}). Engineering stress was computed from the load and each specimen's
+measured cross-section ($A_0\approx1.1$--$2.3$~mm$^2$); the tensile modulus
+$E_t$ is defined as the linear-fit slope of engineering stress versus
+dimensionless strain over the 20--40\% strain interval. Two specimen series
+were tested: (i)~magnetization-direction groups (non-magnetized $n=5$,
+$x$-magnetized $n=2$, $y$-magnetized $n=4$, $z$-magnetized $n=5$ valid
+specimens) and (ii)~a composition series of Ecoflex~00-30 with
+50/60/70/80~wt\% NdFeB ($n=$~5/4/4/5 specimens, respectively).
+
+\subsection*{Magnetic characterization}
+For each geometry, the no-load field, sensitivity and limit of detection
+(LOD) were characterized, and $\sigma_B$ and the sensitivity
+$S=\mathrm{d}|\Delta\mathbf{B}|/\mathrm{d}F$ are reported.
+
+\subsection*{Geometry--sensitivity characterization (completed dataset)}
+Two complementary datasets were acquired with a single MLX90393 beneath the
+cilia (magnetic logging at $\approx$1100~Hz) and an ATI six-axis force/torque
+sensor (S/N FT35606; 1000~Hz acquisition with 16-sample averaging, 62.5~Hz
+effective) as the force reference. Loading was applied manually at nominal
+indentation depths of 1, 2 and 3~mm, normally and tangentially, in repeated
+load--hold ($\sim$15--25~s)--unload events. (i)~\emph{Geometry matrix}: each
+of the nine $(L,d)$ combinations was measured with $\geq$3 trials per
+condition point, yielding 44 valid sensitivity points (one artifact
+excluded). (ii)~\emph{Cilia-array dataset}: square arrays of $2\times2$ to
+$5\times5$ cilia at pitches of 0.5 or 1.0~mm ($L=3$ and 5~mm) were read by a
+sensor $\approx$1~mm beneath the array center, with 20 trials per condition
+and 1871 of 1920 trials passing quality control (97.4\%). Processing
+comprised Hampel despiking, zero-phase Butterworth low-pass filtering
+(magnetic 20~Hz, force 10~Hz), pre-load baseline subtraction and
+loading-edge alignment of the two streams (median alignment correlation
+$r=0.79$); the per-trial sensitivity is the plateau ratio
+$S=|\Delta\mathbf{B}|/F$. A dipole-superposition large-deflection beam model
+of the cilium, validated against finite-element case studies (tip-deflection
+deviation $<$0.1\%), reproduces the measured single-cilium responses with
+relative errors of 0.27--0.41\%. Because loading was manual, the per-trial
+depth varies (peak-amplitude CV 13.4\%); the robot-controlled protocol below
+therefore supersedes these datasets for force-calibrated claims.
+
+\subsection*{Cyclic fatigue testing}
+Three independent samples were cycled in compression to 150{,}000 cycles
+under machine-driven periodic loading (period 0.512~s, $\approx$2.0~Hz;
+drive amplitude 0.52--0.62~N; actuator: \dataneeded{model}), with
+interleaved checkpoints at 5k--150k cycles ($\sim$1000 recorded cycles per
+checkpoint; the 10k checkpoint additionally captured all 10{,}000 cycles
+continuously). Sensitivity at each checkpoint was computed as the ratio of
+the median magnetic to the median force peak-to-peak amplitude
+($S=\Delta B_z/\Delta F_z$), with ratio normalization removing
+drive-amplitude changes; checkpoints with a corrupted-packet rate $>$9\%
+were flagged as low confidence and are displayed as open symbols.
+
+\subsection*{Local 2$\times$2 PCB architecture}
+The local unit comprises four MLX90393 sensors at a sensor pitch of
+\dataneeded{pitch} on a patch of \dataneeded{dimensions}
+(\dataneeded{PCB stack/material}).
+
+\subsection*{44-node hand FPCB architecture}
+The hand-shaped FPCB (\dataneeded{material, layer count}) carries sensing
+nodes across the fingertip, finger-pad, palm and thumb regions; each node's
+$x,y$ position, orientation, MLX variant, MUX channel and status are listed
+in an Extended Data table.
+
+\subsection*{MLX90393 configuration}
+Gain, resolution, oversampling (OSR), digital-filter and conversion settings
+are specified in \dataneeded{register settings}. The sampling rate is
+\dataneeded{per-node ODR for the array config; single-sensor fastmode logging
+measured at 1000~Hz (2025-07-17 dataset), confirm for final system}.
+
+\subsection*{MUX/I2C acquisition}
+Acquisition used \dataneeded{MUX part, I2C bus speed, MCU model}. The full
+44-node frame rate was measured at \dataneeded{Hz} (not the chip nominal),
+with firmware \dataneeded{version}.
+
+\subsection*{xArm--Nano17 loading protocol}
+Controlled loading used a UFactory~xArm (\dataneeded{model}) carrying an
+ATI~Nano17 six-axis force/torque sensor (\dataneeded{calibration, resolution})
+fitted with a non-magnetic probe (\dataneeded{PEEK/nylon/acrylic/ceramic};
+\dataneeded{tip geometry, e.g.\ 2~mm hemisphere}). Before each campaign we
+verified that (i)~the probe raised no magnetic signal above $3\sigma$ of the
+sensor noise when hovering 1~mm above the skin without contact, (ii)~the arm
+executing a typical trajectory 5~cm above the sample produced motion-induced
+$|\Delta\mathbf{B}|$ below $3\sigma$ (otherwise the standoff was increased
+and the residual reported) and (iii)~the Nano17 zero drifted by less than
+\dataneeded{mN} over 5~min. Each trial followed a fixed profile: pre-contact
+baseline, approach at \dataneeded{approach speed, mm\,s$^{-1}$} to the target
+normal force, a hold of \dataneeded{hold duration, s} and retraction, with
+force setpoints and, for shear, in-plane displacement commanded in closed
+loop against the Nano17 reading.
+
+\subsection*{Time synchronization}
+The MLX90393 array (\dataneeded{ODR, Hz}), the Nano17 (\dataneeded{rate, Hz}),
+the xArm pose stream and video were logged on a single host, with every
+sample carrying a host timestamp. Streams were hard-aligned per trial to a
+common event---a brief probe tap (contact-to-release $<$100~ms) at trial
+onset that appears simultaneously as a force spike and a magnetic
+transient---giving a residual synchronization error of \dataneeded{ms}
+(verified by 10 repeated taps).
+
+\subsection*{Baseline correction}
+For every trial, the per-channel baseline---the mean over a
+\dataneeded{pre-contact window, s} pre-contact window---was subtracted to
+give $\Delta\mathbf{B}$. Slow drift was monitored by returning the probe to a
+fixed reference position every \dataneeded{$N$} trials (anchor trials);
+anchor drift exceeding \dataneeded{threshold, $\mu$T} triggered re-baselining
+of the intervening block. Trials logged as mechanically disturbed were
+excluded and re-recorded.
+
+\subsection*{Temperature compensation}
+The MLX90393 on-die temperature channel was recorded continuously. A
+per-channel affine temperature model $\mathbf{B}_{\mathrm{corr}}=\mathbf{B}-
+\boldsymbol{\beta}(T-T_0)$ was fitted on no-load segments spanning the
+working temperature range and applied before baseline subtraction
+(\dataneeded{fitted $\boldsymbol{\beta}$ range}).
+
+\subsection*{Signal filtering}
+Distinct frequency bands were used for the three regimes and are reported
+separately: quasi-static contact (\dataneeded{low-pass cutoff, Hz}),
+airflow-induced fluctuation (band-pass \dataneeded{f1--f2, Hz}) and pulse
+(band-pass \dataneeded{f1--f2, Hz}; a preliminary 0.5--10~Hz Butterworth was
+used for the demonstration in Extended Data). All filters were zero-phase
+(forward--backward) Butterworth filters of order \dataneeded{order},
+implemented in SciPy (\dataneeded{version}); filter type, order and cutoffs
+are stated with every result.
+
+\subsection*{Motion-artifact suppression}
+A cilia-free reference MLX90393 placed away from the contact surface
+(\dataneeded{location}) captured common-mode field variation from posture,
+cables and ambient sources. Each sensing node was corrected as
+$\Delta\mathbf{B}_{i,\mathrm{corr}}=\Delta\mathbf{B}_i-\alpha_i
+\Delta\mathbf{B}_{\mathrm{ref}}$, with per-node gains $\alpha_i$ fitted by
+least squares on no-contact motion recordings. Suppression was quantified by
+the contact-to-motion ratio $\mathrm{CMR}=20\log_{10}(A_{\mathrm{contact}}/
+A_{\mathrm{motion}})$ before and after correction, and by the false-positive
+rate on held-out no-contact motions.
+
+\subsection*{Inverse model}
+The feature vector is the concatenated tri-axis reading of every node in a
+unit (12 channels for the $2\times2$). Four model families were compared:
+nearest-neighbor fingerprint matching, ridge/polynomial regression, random
+forest and a compact multilayer perceptron. Targets were predicted in three
+cumulative stages---$(x,y)$; $(x,y,F_n)$; $(x,y,F_n,F_x,F_y)$---so that
+added outputs could not degrade earlier ones unnoticed. Hyperparameters were
+selected on the validation split only (\dataneeded{search space and selected
+values}); training used \dataneeded{scikit-learn/PyTorch version}.
+
+\subsection*{Train/validation/test split}
+Splits were made \emph{by contact position}: of the grid positions,
+\dataneeded{n} were assigned to training, \dataneeded{n} to validation and
+\dataneeded{n} to an unseen-position test set (60/20/20), so that no test
+position appeared during training. No time frame from a given trial was
+shared across splits, preventing frame-level leakage. Generalization across
+re-mounting was assessed by training and testing on different sessions
+(\dataneeded{number of sessions}); the unseen-position test set was
+evaluated once, at the end.
+
+\subsection*{Statistical analysis}
+Throughout, $n$ denotes independent devices, patches or subjects and is
+reported separately from technical repeats; figures show individual points
+with mean\,$\pm$\,s.d.\ or 95\% confidence intervals. Group comparisons used
+two-sided tests (\dataneeded{test names, e.g.\ ANOVA with Holm correction})
+with exact $P$ values, effect sizes and \dataneeded{multiple-comparison
+correction}; confidence intervals for the cilia gain $G_{\mathrm{cilia}}$
+were obtained by bootstrap over independent patches. Condition order was
+randomized and the randomization seed was stored with each dataset.
+
+\subsection*{Wind-tunnel setup}
+Airflow was generated by \dataneeded{tunnel/fan model} and measured with a
+reference anemometer (\dataneeded{model, accuracy}). To separate the cilia
+aeroelastic response from fan-motor electromagnetic pickup, every speed was
+also recorded with a bare (cilia-free) sensor and with the fan running but
+the flow ducted away (blocked-duct sham). Recordings alternated flow-off and
+flow-on intervals within each file so that a within-file baseline removes
+drift. Speeds \dataneeded{levels, incl.\ $<$2~m\,s$^{-1}$} were presented in
+randomized order with \dataneeded{runs, $\geq$5} independent runs each; the
+2025-07-17 single-sensor session that lacked these controls is documented as
+insufficient in the Extended Data.
+
+\subsection*{Pulse experiment and ethics}
+The study was approved by \dataneeded{IRB/committee, protocol number} and
+all participants gave written informed consent. Radial-artery recordings
+from $n=$~\dataneeded{10--20} subjects were acquired with
+hardware-synchronized ECG (\dataneeded{device}) and, where available, PPG,
+with the reference and magnetic streams sharing a common trigger (alignment
+verified to \dataneeded{ms}). Each subject completed \dataneeded{sessions}
+sessions with re-attachment between sessions; patch location, attachment
+pressure, wrist side, posture and subject ID were logged. Heart-rate
+accuracy, ECG-to-pulse delay, waveform correlation, SNR and beat-to-beat
+variability were computed against the ECG reference; morphological features
+were reported only where stable across beats and subjects.
+
+\subsection*{Data and code availability}
+The datasets generated and analyzed in this study are available at
+\dataneeded{repository/DOI}. Analysis code---including the wind and pulse
+processing pipelines and the figure scripts used here---is available at
+\dataneeded{repository URL}.
+
+\section*{End matter}
+
+\paragraph{Acknowledgements.} \dataneeded{funding sources and grant numbers;
+facilities; individual acknowledgements}
+
+\paragraph{Author contributions.} \dataneeded{per-author contributions using
+CRediT roles}
+
+\paragraph{Competing interests.} \dataneeded{declare any competing interests,
+or state that the authors declare none}
+
+\paragraph{Additional information.} Correspondence and requests for materials
+should be addressed to \dataneeded{corresponding author}.
